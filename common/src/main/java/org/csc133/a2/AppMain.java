@@ -25,3 +25,13 @@ class Game extends Form implements Runnable{
 
     }
 }
+
+class GameWorld {
+    public GameWorld() {
+//        init();
+    }
+
+    private void init() {
+
+    }
+}
