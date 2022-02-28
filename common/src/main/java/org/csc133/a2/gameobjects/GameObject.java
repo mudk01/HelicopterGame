@@ -4,10 +4,12 @@ public class GameObject {
 }
 // use Dimension to encapsulate width and heights of objects
 
-class Fixed extends GameObject {
+abstract class Fixed extends GameObject {
 
 }
 
-class Moveable extends GameObject {
+abstract class Moveable extends GameObject {
+    void move(){
 
+    }
 }
