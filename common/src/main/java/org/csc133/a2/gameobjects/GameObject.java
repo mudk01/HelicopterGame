@@ -1,5 +1,6 @@
 package org.csc133.a2.gameobjects;
 
+import com.codename1.ui.Graphics;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
 import org.csc133.a2.interfaces.Drawable;
@@ -17,6 +18,10 @@ public abstract class GameObject {
     }
 
     public GameObject() {
+
+    }
+
+    void draw(Graphics g, Point centerOrigin) {
 
     }
 

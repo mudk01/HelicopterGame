@@ -23,12 +23,36 @@ public class Fire {
         isDetected = false;
     }
 
+    public void setTrue() {
+        isDetected = true;
+    }
+
+    public void setFalse() {
+        isDetected = false;
+    }
+
+    public boolean detected() {
+        return isDetected;
+    }
+
     void growFire() {
         int move = new Random().nextInt(2);
         size += move;
         radius = size/2;
         centerLocation.setX(centerLocation.getX() - (int)(move/2));
         centerLocation.setY(centerLocation.getY() - (int)(move/2));
+    }
+
+    public Point getFireLocation() {
+        return centerLocation;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public int getSize() {
+        return size;
     }
 
     void reduceFire(int water) {
