@@ -7,7 +7,7 @@ import org.csc133.a2.interfaces.Steerable;
 
 import java.util.ArrayList;
 
-public class Helicopter extends Moveable implements Steerable {
+public class Helicopter extends GameObject {
     private int size, hRadius, centerX, centerY, currSpeed, fuel, water;
     private Point helipadCenterLocation, heliLocation;
     private int endHeadX, endHeadY, padSize;
@@ -136,13 +136,17 @@ public class Helicopter extends Moveable implements Steerable {
                 heliLocation.getY() + (size*4));
     }
 
-    @Override
-    public void steerLeft() {
 
+    @Override
+    public void draw(Graphics g, Point containerOrigin) {
+        draw(g);
     }
 
-    @Override
-    public void steerRight() {
+    public int getSpeed() {
+        return currSpeed;
+    }
 
+    public double getHeading() {
+        return angle;
     }
 }

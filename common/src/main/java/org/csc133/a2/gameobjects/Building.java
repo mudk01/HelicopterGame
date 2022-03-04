@@ -4,7 +4,7 @@ import com.codename1.ui.Graphics;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
 
-public class Building extends Fixed{
+public class Building extends GameObject{
     private Point location;
     private Dimension dimensions;
     private int value, damage;
@@ -16,9 +16,6 @@ public class Building extends Fixed{
     void setFireInBuilding(Fire fire) {
 
     }
-
-
-
 
     @Override
     public void draw(Graphics g, Point containerOrigin) {

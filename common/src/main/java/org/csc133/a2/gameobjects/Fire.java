@@ -7,7 +7,7 @@ import com.codename1.ui.geom.Point;
 
 import java.util.Random;
 
-public class Fire {
+public class Fire extends GameObject {
     private Point centerLocation;
     private int size, radius;
     private Font fireSizeFont;
@@ -70,5 +70,10 @@ public class Fire {
             g.drawString("" + size, centerLocation.getX() + radius,
                     centerLocation.getY() + radius);
         }
+    }
+
+    @Override
+    public void draw(Graphics g, Point containerOrigin) {
+
     }
 }

@@ -5,7 +5,7 @@ import com.codename1.ui.Graphics;
 import com.codename1.ui.geom.Point;
 import org.csc133.a2.Game;
 
-public class Helipad extends Fixed{
+public class Helipad extends GameObject{
     private Point rectangleLocation, centerLocation;
     private int boxSize;
     private int circleSize, radius;
@@ -42,6 +42,6 @@ public class Helipad extends Fixed{
 
     @Override
     public void draw(Graphics g, Point containerOrigin) {
-
+        draw(g);
     }
 }

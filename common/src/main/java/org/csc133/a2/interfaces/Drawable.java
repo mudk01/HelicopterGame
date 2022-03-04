@@ -4,7 +4,5 @@ import com.codename1.ui.Graphics;
 import com.codename1.ui.geom.Point;
 
 public interface Drawable {
-    public static void draw(Graphics g, Point containerOrigin) {
-
-    }
+    void draw(Graphics g, Point containerOrigin);
 }

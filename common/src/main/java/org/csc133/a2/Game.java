@@ -4,10 +4,16 @@ import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Display;
 import com.codename1.ui.Form;
 import com.codename1.ui.Graphics;
+import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.util.UITimer;
+import org.csc133.a2.views.MapView;
+import org.csc133.a2.views.GlassCockpit;
+
 
 public class Game extends Form implements Runnable {
     private GameWorld gw;
+    MapView mapView;
+    GlassCockpit glassCockpit;
 
     public final static int DISP_W = Display.getInstance().getDisplayWidth();
     public final static int DISP_H = Display.getInstance().getDisplayHeight();
@@ -22,6 +28,14 @@ public class Game extends Form implements Runnable {
 
     public Game() {
         gw = new GameWorld();
+        setTitle("A2 Game");
+
+        mapView = new MapView(gw);
+        glassCockpit = new GlassCockpit(gw);
+
+        this.setLayout(new BorderLayout());
+        this.add(BorderLayout.NORTH, glassCockpit);
+        this.add(BorderLayout.CENTER, mapView);
 
         UITimer timer = new UITimer(this);
         timer.schedule(50, true, this);
@@ -38,6 +52,7 @@ public class Game extends Form implements Runnable {
     @Override
     public void run() {
         gw.tick();
+        glassCockpit.update();
         repaint();
     }
 }
