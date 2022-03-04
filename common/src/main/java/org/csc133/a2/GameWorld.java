@@ -17,11 +17,12 @@ public class GameWorld {
     private Dimension worldSize;
 
     public GameWorld() {
+        worldSize = new Dimension();
         init();
     }
 
     public void init() {
-        worldSize = new Dimension();
+        System.err.println(worldSize);
         river = new River(worldSize);
         helipad = new Helipad();
         helicopter = new Helicopter(helipad.getHelipadCenter(),
@@ -53,7 +54,7 @@ public class GameWorld {
         return String.valueOf(helicopter.getSpeed());
     }
 
-    public void setDimension(com.codename1.ui.geom.Dimension dimension) {
+    public void setDimension(Dimension worldSize) {
         this.worldSize = worldSize;
     }
 }
