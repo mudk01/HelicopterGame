@@ -1,13 +1,11 @@
 package org.csc133.a2;
 
-import org.csc133.a2.gameobjects.GameObject;
-import org.csc133.a2.gameobjects.Helicopter;
-import org.csc133.a2.gameobjects.Helipad;
-import org.csc133.a2.gameobjects.River;
+import org.csc133.a2.gameobjects.*;
 
 import java.awt.*;
 import java.util.ArrayList;
 import com.codename1.ui.geom.Dimension;
+import com.codename1.ui.geom.Point;
 
 public class GameWorld {
     private River river;
@@ -15,6 +13,10 @@ public class GameWorld {
     private Helicopter helicopter;
     private ArrayList<GameObject> gameObjects;
     private Dimension worldSize;
+    private Building building;
+    private Point topBuildingLocation, rightBuildingLocation,
+            leftBuildingLocation;
+    private Dimension topBuildingSize, rightBuildingSize, leftBuildingSize;
 
     public GameWorld() {
         worldSize = new Dimension();
@@ -27,10 +29,15 @@ public class GameWorld {
         helipad = new Helipad(worldSize);
         helicopter = new Helicopter(helipad.getHelipadCenter(),
                 helipad.getHelipadSize(), worldSize);
+        topBuildingLocation = new Point(worldSize.getWidth()/8, 5);
+        topBuildingSize = new Dimension((worldSize.getWidth()*2)/3,
+                worldSize.getHeight()/10);
+        building = new Building(worldSize, topBuildingLocation, topBuildingSize);
         gameObjects = new ArrayList<>();
         gameObjects.add(river);
         gameObjects.add(helipad);
         gameObjects.add(helicopter);
+        gameObjects.add(building);
     }
 
     public void tick() {
