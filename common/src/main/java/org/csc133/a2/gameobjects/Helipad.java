@@ -2,6 +2,7 @@ package org.csc133.a2.gameobjects;
 
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Graphics;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
 import org.csc133.a2.Game;
 
@@ -9,26 +10,22 @@ public class Helipad extends GameObject{
     private Point rectangleLocation, centerLocation;
     private int boxSize;
     private int circleSize, radius;
+    private Dimension dimension;
 
-    public Helipad() {
-        boxSize = 150;
-        circleSize = 100;
+    public Helipad(Dimension worldSize) {
+        this.worldSize = worldSize;
+        this.color = ColorUtil.rgb(139,139,139);
+        dimension = new Dimension(this.worldSize.getWidth(),
+                this.worldSize.getHeight());
+        System.err.println("worldSize: " + worldSize);
+        boxSize = (int) (dimension.getHeight()/8.5);
+        circleSize = (int) (dimension.getHeight()/11.5);
         radius = circleSize/2;
-        rectangleLocation = new Point(Game.DISP_W/2 - boxSize/2,
-                (int) (Game.DISP_H - (boxSize*1.5)));
+        rectangleLocation = new Point(dimension.getWidth()/2 - boxSize/2,
+                (int) (dimension.getHeight() - (boxSize*1.5)));
         centerLocation =
                 new Point(rectangleLocation.getX() + (boxSize/2),
                         rectangleLocation.getY() + (boxSize/2));
-    }
-
-    void draw(Graphics g) {
-        g.setColor(ColorUtil.GRAY);
-        g.drawRect(rectangleLocation.getX(), rectangleLocation.getY(), boxSize,
-                boxSize, 5);
-        g.drawArc(centerLocation.getX() - radius,
-                centerLocation.getY() - radius, circleSize,
-                circleSize, 0, 360);
-        g.setColor(ColorUtil.BLUE);
     }
 
     public Point getHelipadCenter() {
@@ -39,9 +36,15 @@ public class Helipad extends GameObject{
         return circleSize;
     }
 
-
     @Override
     public void draw(Graphics g, Point containerOrigin) {
-        draw(g);
+        g.setColor(color);
+        g.drawRect(containerOrigin.getX() + rectangleLocation.getX(),
+                containerOrigin.getY() + rectangleLocation.getY(), boxSize,
+                boxSize, 5);
+        g.drawArc(containerOrigin.getX() + centerLocation.getX()-radius,
+                containerOrigin.getY() + centerLocation.getY()-radius,
+                circleSize, circleSize, 0, 360);
+        System.err.println("container origin: " + containerOrigin);
     }
 }

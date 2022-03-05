@@ -10,28 +10,29 @@ import org.csc133.a2.Game;
 import java.awt.*;
 
 public class River extends GameObject{
+    private int width, height, x, y;
+    private Point location;
+
 
     public River(Dimension worldSize) {
-        this.color = ColorUtil.BLUE;
+        this.color = ColorUtil.rgb(0,52,254);
         this.worldSize = worldSize;
-        this.location = new Point(0, worldSize.getHeight()/3);
+        location = new Point(0, worldSize.getHeight()/3);
         System.err.println(worldSize.getHeight()/3);
         this.dimension = new Dimension(worldSize.getWidth(),
                 worldSize.getHeight());
-        System.err.println(worldSize);
+        width = dimension.getWidth();
+        height = dimension.getHeight()/9;
 
     }
 
     @Override
     public void draw(Graphics g, Point containerOrigin) {
         g.setColor(color);
-        int x = containerOrigin.getX() + location.getX();
-        int y = containerOrigin.getY() + location.getY();
-        int h = dimension.getHeight()/9;
-        int w = dimension.getWidth();
-        g.drawRect(x,y-h,w,h,5);
+        x = containerOrigin.getX() + location.getX();
+        y = containerOrigin.getY() + location.getY()-height;
 
-//        draw(g);
+        g.drawRect(x,y,width,height,5);
     }
 
 

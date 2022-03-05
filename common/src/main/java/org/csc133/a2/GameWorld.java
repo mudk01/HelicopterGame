@@ -24,7 +24,7 @@ public class GameWorld {
     public void init() {
         System.err.println(worldSize);
         river = new River(worldSize);
-        helipad = new Helipad();
+        helipad = new Helipad(worldSize);
         helicopter = new Helicopter(helipad.getHelipadCenter(),
                 helipad.getHelipadSize());
         gameObjects = new ArrayList<>();
