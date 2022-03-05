@@ -26,7 +26,7 @@ public class GameWorld {
         river = new River(worldSize);
         helipad = new Helipad(worldSize);
         helicopter = new Helicopter(helipad.getHelipadCenter(),
-                helipad.getHelipadSize());
+                helipad.getHelipadSize(), worldSize);
         gameObjects = new ArrayList<>();
         gameObjects.add(river);
         gameObjects.add(helipad);

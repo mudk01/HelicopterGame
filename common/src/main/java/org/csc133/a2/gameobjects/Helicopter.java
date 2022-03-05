@@ -2,6 +2,7 @@ package org.csc133.a2.gameobjects;
 
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Graphics;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
 import org.csc133.a2.interfaces.Steerable;
 
@@ -14,9 +15,14 @@ public class Helicopter extends GameObject {
     private double angle;
     private final int MAX_SPEED = 10;
     private boolean riverCollision;
+    private Dimension dimension;
 
-    public Helicopter(Point heliCenter, int helipadSize) {
-        size = 30;
+    public Helicopter(Point heliCenter, int helipadSize, Dimension worldSize) {
+        this.color = ColorUtil.rgb(252, 252, 28);
+        this.worldSize = worldSize;
+        dimension = new Dimension(this.worldSize.getWidth(),
+                this.worldSize.getHeight());
+        size = dimension.getHeight()/42;
         currSpeed = 0;
         fuel = 0;
         water = 0;
@@ -123,23 +129,24 @@ public class Helicopter extends GameObject {
                 + padSize/4));
     }
 
-    void draw(Graphics g) {
-        g.setColor(ColorUtil.YELLOW);
-        g.fillArc(heliLocation.getX(),
-                heliLocation.getY(), size,
-                size, 0, 360);
-        g.drawLine(centerX, centerY, endHeadX,
-                endHeadY);
-        g.drawString("F: " + fuel, heliLocation.getX(),
-                heliLocation.getY() + (size*3));
-        g.drawString("W: " + water ,heliLocation.getX(),
-                heliLocation.getY() + (size*4));
-    }
-
-
     @Override
     public void draw(Graphics g, Point containerOrigin) {
-        draw(g);
+        g.setColor(color);
+        g.fillArc(containerOrigin.getX() + heliLocation.getX(),
+                containerOrigin.getY() + heliLocation.getY(), size,
+                size, 0, 360);
+        g.drawLine(containerOrigin.getX() + centerX,
+                containerOrigin.getY() + centerY,
+                containerOrigin.getX() + endHeadX,
+                containerOrigin.getY() + endHeadY);
+        g.drawString("F: " + fuel,
+                containerOrigin.getX() + heliLocation.getX(),
+                containerOrigin.getY() + heliLocation.getY() +
+                        (int)(size*2.5));
+        g.drawString("W: " + water ,
+                containerOrigin.getX() + heliLocation.getX(),
+                containerOrigin.getY() + heliLocation.getY() +
+                        (int)(size*3.5));
     }
 
     public int getSpeed() {
