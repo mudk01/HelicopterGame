@@ -20,9 +20,7 @@ public class River extends GameObject{
         location = new Point(0, worldSize.getHeight()/3);
         System.err.println(worldSize.getHeight()/3);
         this.dimension = new Dimension(worldSize.getWidth(),
-                worldSize.getHeight());
-        width = dimension.getWidth();
-        height = dimension.getHeight()/9;
+                worldSize.getHeight()/9);
 
     }
 
@@ -32,7 +30,7 @@ public class River extends GameObject{
         x = containerOrigin.getX() + location.getX();
         y = containerOrigin.getY() + location.getY()-height;
 
-        g.drawRect(x,y,width,height,5);
+        g.drawRect(x,y,dimension.getWidth(),dimension.getHeight(),5);
     }
 
 
