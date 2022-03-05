@@ -58,6 +58,7 @@ public class GameWorld {
     }
 
     public void tick() {
+        helicopter.move();
 
     }
 
@@ -80,5 +81,29 @@ public class GameWorld {
 
     public void setDimension(Dimension worldSize) {
         this.worldSize = worldSize;
+    }
+
+    public void input(int input) {
+        switch (input) {
+            case -92:
+                helicopter.moveBackwards();
+                break;
+            case -91:
+                helicopter.moveForwards();
+                break;
+            case -93:
+                helicopter.moveLeft();
+                break;
+            case -94:
+                helicopter.moveRight();
+                break;
+            case 'd':
+                helicopter.drinkWater();
+                break;
+            case 'f':
+//                helicopter.fightFire(fires);
+                helicopter.dropWater();
+                break;
+        }
     }
 }

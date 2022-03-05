@@ -33,6 +33,14 @@ public class Game extends Form implements Runnable {
         mapView = new MapView(gw);
         glassCockpit = new GlassCockpit(gw);
 
+
+        addKeyListener(-92, (evt) -> gw.input(-92));
+        addKeyListener(-91, (evt) -> gw.input(-91));
+        addKeyListener(-94, (evt) -> gw.input(-94));
+        addKeyListener(-93, (evt) -> gw.input(-93));
+        addKeyListener('d', (evt) -> gw.input('d'));
+        addKeyListener('f', (evt) -> gw.input('f'));
+
         this.setLayout(new BorderLayout());
         this.add(BorderLayout.NORTH, glassCockpit);
         this.add(BorderLayout.CENTER, mapView);
@@ -46,7 +54,6 @@ public class Game extends Form implements Runnable {
 
     public void paint(Graphics g) {
         super.paint(g);
-//        gw.draw(g);
     }
 
     @Override

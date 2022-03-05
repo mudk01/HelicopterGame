@@ -39,7 +39,7 @@ public class Helicopter extends GameObject {
         padSize = helipadSize;
     }
 
-    void move(){
+    public void move(){
         heliLocation.setY((int) (heliLocation.getY() - Math.sin(angle) *
                 currSpeed));
         centerY = heliLocation.getY() + hRadius;
@@ -51,25 +51,25 @@ public class Helicopter extends GameObject {
         fuel -= (int) (Math.sqrt(currSpeed) + 5);
     }
 
-    void moveForwards() {
+    public void moveForwards() {
         if(currSpeed < MAX_SPEED) {
             currSpeed++;
         }
     }
 
-    void moveBackwards() {
+    public void moveBackwards() {
         if(currSpeed > 0) {
             currSpeed--;
         }
     }
 
-    void moveLeft() {
+    public void moveLeft() {
         angle += Math.toRadians(15);
         endHeadX = (int) (centerX + Math.cos(angle) * size*2);
         endHeadY = (int) (centerY - Math.sin(angle) * size*2);
     }
 
-    void moveRight() {
+    public void moveRight() {
         angle -= Math.toRadians(15);
         endHeadX = (int) (centerX + Math.cos(angle) * size*2);
         endHeadY = (int) (centerY - Math.sin(angle) * size*2);
@@ -90,7 +90,7 @@ public class Helicopter extends GameObject {
                 + fire.getRadius()));
     }
 
-    void drinkWater() {
+    public void drinkWater() {
         if((riverCollision && currSpeed <= 2) && water < 1000) {
             water += 100;
         }
@@ -105,7 +105,7 @@ public class Helicopter extends GameObject {
         }
     }
 
-    void dropWater() {
+    public void dropWater() {
         water = 0;
     }
 
