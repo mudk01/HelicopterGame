@@ -13,7 +13,7 @@ public class GameWorld {
     private Helicopter helicopter;
     private ArrayList<GameObject> gameObjects;
     private Dimension worldSize;
-    private Building building;
+    private Building buildingTop, buildingRight, buildingLeft;
     private Point topBuildingLocation, rightBuildingLocation,
             leftBuildingLocation;
     private Dimension topBuildingSize, rightBuildingSize, leftBuildingSize;
@@ -29,15 +29,32 @@ public class GameWorld {
         helipad = new Helipad(worldSize);
         helicopter = new Helicopter(helipad.getHelipadCenter(),
                 helipad.getHelipadSize(), worldSize);
-        topBuildingLocation = new Point(worldSize.getWidth()/8, 5);
+        topBuildingLocation = new Point(worldSize.getWidth()/6, 5);
+        rightBuildingSize = new Dimension(worldSize.getHeight()/6,
+                worldSize.getHeight()/2);
+        rightBuildingLocation =
+                new Point(worldSize.getWidth()/10 ,
+                        worldSize.getHeight()/3 + worldSize.getHeight()/18);
+        leftBuildingSize = new Dimension(worldSize.getHeight()/5,
+                worldSize.getHeight()/3);
+        leftBuildingLocation =
+                new Point(worldSize.getWidth() - worldSize.getWidth()/10 - leftBuildingSize.getWidth(),
+                        worldSize.getHeight()/2);
         topBuildingSize = new Dimension((worldSize.getWidth()*2)/3,
                 worldSize.getHeight()/10);
-        building = new Building(worldSize, topBuildingLocation, topBuildingSize);
+        buildingTop = new Building(worldSize, topBuildingLocation,
+                topBuildingSize);
+        buildingRight = new Building(worldSize, rightBuildingLocation,
+                rightBuildingSize);
+        buildingLeft = new Building(worldSize, leftBuildingLocation,
+                leftBuildingSize);
         gameObjects = new ArrayList<>();
         gameObjects.add(river);
         gameObjects.add(helipad);
         gameObjects.add(helicopter);
-        gameObjects.add(building);
+        gameObjects.add(buildingTop);
+        gameObjects.add(buildingRight);
+        gameObjects.add(buildingLeft);
     }
 
     public void tick() {
