@@ -17,10 +17,10 @@ public class River extends GameObject{
     public River(Dimension worldSize) {
         this.color = ColorUtil.rgb(0,52,254);
         this.worldSize = worldSize;
-        location = new Point(0, worldSize.getHeight()/3);
-        System.err.println(worldSize.getHeight()/3);
         this.dimension = new Dimension(worldSize.getWidth(),
                 worldSize.getHeight()/9);
+        location = new Point(0,
+                worldSize.getHeight()/3-this.dimension.getHeight());
 
     }
 
