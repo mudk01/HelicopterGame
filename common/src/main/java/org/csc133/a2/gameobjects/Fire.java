@@ -3,6 +3,7 @@ package org.csc133.a2.gameobjects;
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Font;
 import com.codename1.ui.Graphics;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
 
 import java.util.Random;
@@ -13,7 +14,11 @@ public class Fire extends GameObject {
     private Font fireSizeFont;
     private boolean isDetected;
 
-    public Fire(int fireSize, Point fireLocation) {
+    public Fire(Dimension worldSize, int fireSize, Point fireLocation) {
+        this.color = ColorUtil.rgb(255, 4, 252);
+        this.worldSize = worldSize;
+        this.dimension = new Dimension(this.worldSize.getWidth(),
+                this.worldSize.getHeight());
         size = fireSize;
         radius = fireSize/2;
         centerLocation = new Point(fireLocation.getX() + radius,
@@ -59,21 +64,27 @@ public class Fire extends GameObject {
         size -= water / (new Random().nextInt(7) + 8);
     }
 
-    void draw(Graphics g) {
-        g.setColor(ColorUtil.MAGENTA);
-        g.setFont(fireSizeFont);
-
-        if(size>0) {
-            g.fillArc(centerLocation.getX() - radius,
-                    centerLocation.getY() - radius, size, size,0,
-                    360);
-            g.drawString("" + size, centerLocation.getX() + radius,
-                    centerLocation.getY() + radius);
-        }
-    }
+//    void draw(Graphics g) {
+//        g.setColor(ColorUtil.MAGENTA);
+//        g.setFont(fireSizeFont);
+//
+//        if(size>0) {
+//            g.fillArc(centerLocation.getX() - radius,
+//                    centerLocation.getY() - radius, size, size,0,
+//                    360);
+//            g.drawString("" + size, centerLocation.getX() + radius,
+//                    centerLocation.getY() + radius);
+//        }
+//    }
 
     @Override
     public void draw(Graphics g, Point containerOrigin) {
-
+        g.setColor(color);
+        g.setFont(fireSizeFont);
+        g.fillArc(centerLocation.getX()-radius,
+                containerOrigin.getY() + centerLocation.getY() - radius, size,
+                size, 0, 360);
+        g.drawString("" + size, centerLocation.getX() + radius,
+                containerOrigin.getY() + centerLocation.getY() + radius);
     }
 }

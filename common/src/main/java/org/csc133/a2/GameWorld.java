@@ -17,6 +17,7 @@ public class GameWorld {
     private Point topBuildingLocation, rightBuildingLocation,
             leftBuildingLocation;
     private Dimension topBuildingSize, rightBuildingSize, leftBuildingSize;
+    private Fire fire;
 
     public GameWorld() {
         worldSize = new Dimension();
@@ -48,6 +49,8 @@ public class GameWorld {
                 rightBuildingSize);
         buildingLeft = new Building(worldSize, leftBuildingLocation,
                 leftBuildingSize);
+        fire = new Fire(worldSize, 500, new Point(worldSize.getWidth()/2,
+                worldSize.getHeight()/5));
         gameObjects = new ArrayList<>();
         gameObjects.add(river);
         gameObjects.add(helipad);
@@ -55,6 +58,7 @@ public class GameWorld {
         gameObjects.add(buildingTop);
         gameObjects.add(buildingRight);
         gameObjects.add(buildingLeft);
+        gameObjects.add(fire);
     }
 
     public void tick() {
