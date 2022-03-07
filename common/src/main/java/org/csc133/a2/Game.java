@@ -6,6 +6,7 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.util.UITimer;
+import org.csc133.a2.views.ControlCluster;
 import org.csc133.a2.views.MapView;
 import org.csc133.a2.views.GlassCockpit;
 
@@ -14,6 +15,7 @@ public class Game extends Form implements Runnable {
     private GameWorld gw;
     MapView mapView;
     GlassCockpit glassCockpit;
+    ControlCluster controlCluster;
 
     public final static int DISP_W = Display.getInstance().getDisplayWidth();
     public final static int DISP_H = Display.getInstance().getDisplayHeight();
@@ -31,6 +33,7 @@ public class Game extends Form implements Runnable {
         this.getStyle().setBgColor(ColorUtil.rgb(0, 0, 0));
         mapView = new MapView(gw);
         glassCockpit = new GlassCockpit(gw);
+        controlCluster = new ControlCluster(gw);
 
 
         addKeyListener(-92, (evt) -> gw.input(-92));
@@ -43,6 +46,7 @@ public class Game extends Form implements Runnable {
         this.setLayout(new BorderLayout());
         this.add(BorderLayout.NORTH, glassCockpit);
         this.add(BorderLayout.CENTER, mapView);
+        this.add(BorderLayout.SOUTH, controlCluster);
 
         UITimer timer = new UITimer(this);
         timer.schedule(50, true, this);

@@ -14,8 +14,6 @@ public class MapView extends Container {
 
     public MapView(GameWorld gw) {
         this.gw = gw;
-        this.getStyle().setBgColor(ColorUtil.rgb(0,0,0));
-        this.getStyle().setBgTransparency(255);
     }
 
     @Override

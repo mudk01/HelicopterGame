@@ -12,6 +12,10 @@ public class GlassCockpit extends Container {
     public GlassCockpit(GameWorld gw) {
         this.gw = gw;
         this.setLayout(new GridLayout(2, 7));
+
+        this.getStyle().setBgColor(ColorUtil.rgb(255,255,255));
+        this.getStyle().setBgTransparency(255);
+
         this.add("Heading");
         this.add("Speed");
         this.add("Fuel");
