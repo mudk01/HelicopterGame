@@ -4,6 +4,8 @@ import org.csc133.a2.gameobjects.*;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
+
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
 
@@ -17,7 +19,10 @@ public class GameWorld {
     private Point topBuildingLocation, rightBuildingLocation,
             leftBuildingLocation;
     private Dimension topBuildingSize, rightBuildingSize, leftBuildingSize;
-    private Fire fire;
+    private int fireSizeLeft, fireSizeRight, fireSizeCenter;
+    private Point fireLocationLeft, fireLocationCenter, fireLocatonRight;
+    private Fire fireLeft, fireCenter, fireRight;
+    private ArrayList<Fire> fires, deadFires;
 
     public GameWorld() {
         worldSize = new Dimension();
@@ -49,16 +54,40 @@ public class GameWorld {
                 rightBuildingSize);
         buildingLeft = new Building(worldSize, leftBuildingLocation,
                 leftBuildingSize);
-        fire = new Fire(worldSize, 500, new Point(worldSize.getWidth()/2,
-                worldSize.getHeight()/5));
+        fireSizeLeft = new Random().nextInt(100) +
+                worldSize.getHeight()/10;
+        fireSizeRight = new Random().nextInt(100) +
+                worldSize.getHeight()/8;
+        fireSizeCenter = new Random().nextInt(100) +
+                worldSize.getHeight()/5;
+        fireLocationLeft = new Point(new Random().nextInt(80) +
+                (int)(worldSize.getWidth()/4.5),
+                new Random().nextInt(50) +
+                        worldSize.getHeight()/3 -
+                        (int)(worldSize.getHeight()/3.5));
+        fireLocationCenter = new Point(new Random().nextInt(80) +
+                worldSize.getWidth()/2,
+                new Random().nextInt(80) +
+                        worldSize.getHeight()/2);
+        fireLocatonRight = new Point(new Random().nextInt(50) +
+                worldSize.getWidth() -
+                (int)(fireSizeCenter *1.5), new Random().nextInt(80) +
+                worldSize.getHeight()/3 -
+                (int)(worldSize.getHeight()/3.5));
+        fireLeft = new Fire(worldSize, fireSizeLeft, fireLocationLeft);
+        fireCenter = new Fire(worldSize, fireSizeRight, fireLocationCenter);
+        fireRight = new Fire(worldSize, fireSizeCenter, fireLocatonRight);
         gameObjects = new ArrayList<>();
+        fires = new ArrayList<>();
         gameObjects.add(river);
         gameObjects.add(helipad);
         gameObjects.add(helicopter);
         gameObjects.add(buildingTop);
         gameObjects.add(buildingRight);
         gameObjects.add(buildingLeft);
-        gameObjects.add(fire);
+        gameObjects.add(fireLeft);
+        gameObjects.add(fireCenter);
+        gameObjects.add(fireRight);
     }
 
     public void tick() {
