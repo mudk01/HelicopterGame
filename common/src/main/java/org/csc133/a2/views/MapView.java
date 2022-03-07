@@ -1,5 +1,6 @@
 package org.csc133.a2.views;
 
+import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Container;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.geom.Dimension;
@@ -13,6 +14,8 @@ public class MapView extends Container {
 
     public MapView(GameWorld gw) {
         this.gw = gw;
+        this.getStyle().setBgColor(ColorUtil.rgb(0,0,0));
+        this.getStyle().setBgTransparency(255);
     }
 
     @Override

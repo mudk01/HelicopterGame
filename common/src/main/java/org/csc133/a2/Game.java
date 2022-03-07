@@ -28,8 +28,7 @@ public class Game extends Form implements Runnable {
 
     public Game() {
         gw = new GameWorld();
-        setTitle("A2 Game");
-
+        this.getStyle().setBgColor(ColorUtil.rgb(0, 0, 0));
         mapView = new MapView(gw);
         glassCockpit = new GlassCockpit(gw);
 
@@ -48,7 +47,6 @@ public class Game extends Form implements Runnable {
         UITimer timer = new UITimer(this);
         timer.schedule(50, true, this);
 
-        this.getAllStyles().setBgColor(ColorUtil.rgb(0, 0, 0));
         this.show();
     }
 
