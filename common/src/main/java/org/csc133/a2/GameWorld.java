@@ -22,7 +22,8 @@ public class GameWorld {
     private int fireSizeLeft, fireSizeRight, fireSizeCenter;
     private Point fireLocationLeft, fireLocationCenter, fireLocatonRight;
     private Fire fireLeft, fireCenter, fireRight;
-    private ArrayList<Fire> fires, deadFires;
+//    private ArrayList<Fire> fires, deadFires;
+    private Fires fires;
 
     public GameWorld() {
         worldSize = new Dimension();
@@ -78,16 +79,17 @@ public class GameWorld {
         fireCenter = new Fire(worldSize, fireSizeRight, fireLocationCenter);
         fireRight = new Fire(worldSize, fireSizeCenter, fireLocatonRight);
         gameObjects = new ArrayList<>();
-        fires = new ArrayList<>();
+        fires = new Fires();
+        fires.add(fireLeft);
+        fires.add(fireCenter);
+        fires.add(fireRight);
         gameObjects.add(river);
         gameObjects.add(helipad);
         gameObjects.add(helicopter);
         gameObjects.add(buildingTop);
         gameObjects.add(buildingRight);
         gameObjects.add(buildingLeft);
-        gameObjects.add(fireLeft);
-        gameObjects.add(fireCenter);
-        gameObjects.add(fireRight);
+        gameObjects.add(fires);
     }
 
     public void tick() {
