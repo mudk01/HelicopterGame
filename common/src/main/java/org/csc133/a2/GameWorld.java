@@ -1,5 +1,6 @@
 package org.csc133.a2;
 
+import com.codename1.ui.Display;
 import org.csc133.a2.gameobjects.*;
 
 import java.awt.*;
@@ -127,10 +128,10 @@ public class GameWorld {
                 helicopter.moveForwards();
                 break;
             case -93:
-                helicopter.moveLeft();
+                helicopter.steerLeft();
                 break;
             case -94:
-                helicopter.moveRight();
+                helicopter.steerRight();
                 break;
             case 'd':
                 helicopter.drinkWater();
@@ -140,5 +141,9 @@ public class GameWorld {
                 helicopter.dropWater();
                 break;
         }
+    }
+
+    public void exitApplication() {
+        Display.getInstance().exitApplication();
     }
 }

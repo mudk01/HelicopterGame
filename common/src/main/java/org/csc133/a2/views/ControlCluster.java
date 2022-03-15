@@ -8,6 +8,7 @@ import com.codename1.ui.Label;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.GridLayout;
 import org.csc133.a2.GameWorld;
+import org.csc133.a2.commands.ExitCommand;
 
 import javax.swing.border.Border;
 
@@ -34,6 +35,8 @@ public class ControlCluster extends Container {
         drink = new Button("Drink");
         brake = new Button("Brake");
         accelerate = new Button("Accel");
+
+        exit.setCommand(new ExitCommand(gw));
 
         leftCont.add(BorderLayout.WEST, left);
         leftCont.add(BorderLayout.CENTER, right);
