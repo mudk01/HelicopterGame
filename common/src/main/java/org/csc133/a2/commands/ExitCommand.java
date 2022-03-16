@@ -1,8 +1,10 @@
 package org.csc133.a2.commands;
 
 import com.codename1.ui.Command;
+import com.codename1.ui.events.ActionEvent;
 import org.csc133.a2.GameWorld;
-import java.awt.event.ActionEvent;
+//import java.awt.event.ActionEvent;
+
 
 public class ExitCommand extends Command {
     private GameWorld gw;
@@ -13,7 +15,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void actionPerformed(ActionEvent event) {
+    public void actionPerformed(ActionEvent evt) {
         gw.exitApplication();
     }
 }

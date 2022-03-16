@@ -8,7 +8,7 @@ import org.csc133.a2.interfaces.Steerable;
 
 import java.util.ArrayList;
 
-public class Helicopter extends GameObject implements Steerable {
+public class Helicopter extends GameObject {
     private int size, hRadius, centerX, centerY, currSpeed, fuel, water;
     private Point helipadCenterLocation, heliLocation;
     private int endHeadX, endHeadY, padSize;
@@ -63,15 +63,15 @@ public class Helicopter extends GameObject implements Steerable {
         }
     }
 
-    @Override
-    public void steerLeft() {
+//    @Override
+    public void turnLeft() {
         angle += Math.toRadians(15);
         endHeadX = (int) (centerX + Math.cos(angle) * size*2);
         endHeadY = (int) (centerY - Math.sin(angle) * size*2);
     }
 
-    @Override
-    public void steerRight() {
+//    @Override
+    public void turnRight() {
         angle -= Math.toRadians(15);
         endHeadX = (int) (centerX + Math.cos(angle) * size*2);
         endHeadY = (int) (centerY - Math.sin(angle) * size*2);

@@ -128,10 +128,10 @@ public class GameWorld {
                 helicopter.moveForwards();
                 break;
             case -93:
-                helicopter.steerLeft();
+                helicopter.turnLeft();
                 break;
             case -94:
-                helicopter.steerRight();
+                helicopter.turnRight();
                 break;
             case 'd':
                 helicopter.drinkWater();
