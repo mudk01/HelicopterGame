@@ -64,19 +64,6 @@ public class Fire extends GameObject {
         size -= water / (new Random().nextInt(7) + 8);
     }
 
-//    void draw(Graphics g) {
-//        g.setColor(ColorUtil.MAGENTA);
-//        g.setFont(fireSizeFont);
-//
-//        if(size>0) {
-//            g.fillArc(centerLocation.getX() - radius,
-//                    centerLocation.getY() - radius, size, size,0,
-//                    360);
-//            g.drawString("" + size, centerLocation.getX() + radius,
-//                    centerLocation.getY() + radius);
-//        }
-//    }
-
     @Override
     public void draw(Graphics g, Point containerOrigin) {
         g.setColor(color);
