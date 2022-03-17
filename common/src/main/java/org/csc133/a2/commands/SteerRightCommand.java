@@ -1,18 +1,19 @@
 package org.csc133.a2.commands;
 
 import com.codename1.ui.Command;
+import com.codename1.ui.events.ActionEvent;
 import org.csc133.a2.GameWorld;
 
-import java.awt.event.ActionEvent;
 
 public class SteerRightCommand extends Command {
     private GameWorld gw;
 
     public SteerRightCommand(GameWorld gw) {
-        super("Steer Right");
+        super("Right");
         this.gw = gw;
     }
 
     public void actionPerformed(ActionEvent event) {
+        gw.steerRight();
     }
 }
