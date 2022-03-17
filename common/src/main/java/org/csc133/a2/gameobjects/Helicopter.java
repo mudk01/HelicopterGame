@@ -8,7 +8,7 @@ import org.csc133.a2.interfaces.Steerable;
 
 import java.util.ArrayList;
 
-public class Helicopter extends GameObject {
+public class Helicopter extends GameObject implements Steerable {
     private int size, hRadius, centerX, centerY, currSpeed, fuel, water;
     private Point helipadCenterLocation, heliLocation;
     private int endHeadX, endHeadY, padSize;
@@ -51,27 +51,27 @@ public class Helicopter extends GameObject {
         fuel -= (int) (Math.sqrt(currSpeed) + 5);
     }
 
-    public void moveForwards() {
+    public void speedUp() {
         if(currSpeed < MAX_SPEED) {
             currSpeed++;
         }
     }
 
-    public void moveBackwards() {
+    public void slowDown() {
         if(currSpeed > 0) {
             currSpeed--;
         }
     }
 
-//    @Override
-    public void turnLeft() {
+    @Override
+    public void steerLeft() {
         angle += Math.toRadians(15);
         endHeadX = (int) (centerX + Math.cos(angle) * size*2);
         endHeadY = (int) (centerY - Math.sin(angle) * size*2);
     }
 
-//    @Override
-    public void turnRight() {
+    @Override
+    public void steerRight() {
         angle -= Math.toRadians(15);
         endHeadX = (int) (centerX + Math.cos(angle) * size*2);
         endHeadY = (int) (centerY - Math.sin(angle) * size*2);
@@ -98,7 +98,7 @@ public class Helicopter extends GameObject {
         }
     }
 
-    void fightFire(ArrayList<Fire> fires) {
+    public void fightFire(ArrayList<Fire> fires) {
         for(Fire fire : fires) {
             if(fire.detected()) {
                 fire.reduceFire(water);
@@ -111,7 +111,7 @@ public class Helicopter extends GameObject {
         water = 0;
     }
 
-    void setFuel(int fuelIn) {
+    public void setFuel(int fuelIn) {
         fuel = fuelIn;
     }
 
