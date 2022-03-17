@@ -3,7 +3,6 @@ package org.csc133.a2;
 import com.codename1.ui.Display;
 import org.csc133.a2.gameobjects.*;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,8 +22,9 @@ public class GameWorld {
     private int fireSizeLeft, fireSizeRight, fireSizeCenter;
     private Point fireLocationLeft, fireLocationCenter, fireLocatonRight;
     private Fire fireLeft, fireCenter, fireRight;
-//    private ArrayList<Fire> fires, deadFires;
     private Fires fires;
+    private final int FUEL = 25000;
+
 
     public GameWorld() {
         worldSize = new Dimension();
@@ -86,11 +86,12 @@ public class GameWorld {
         fires.add(fireRight);
         gameObjects.add(river);
         gameObjects.add(helipad);
-        gameObjects.add(helicopter);
         gameObjects.add(buildingTop);
         gameObjects.add(buildingRight);
         gameObjects.add(buildingLeft);
         gameObjects.add(fires);
+        gameObjects.add(helicopter);
+        helicopter.setFuel(FUEL);
     }
 
     public void tick() {
@@ -122,16 +123,16 @@ public class GameWorld {
     public void input(int input) {
         switch (input) {
             case -92:
-                helicopter.moveBackwards();
+                helicopter.slowDown();
                 break;
             case -91:
-                helicopter.moveForwards();
+                helicopter.speedUp();
                 break;
             case -93:
-                helicopter.turnLeft();
+                helicopter.steerLeft();
                 break;
             case -94:
-                helicopter.turnRight();
+                helicopter.steerRight();
                 break;
             case 'd':
                 helicopter.drinkWater();
@@ -145,5 +146,35 @@ public class GameWorld {
 
     public void exitApplication() {
         Display.getInstance().exitApplication();
+    }
+
+    public void decelerateHeli() {
+        helicopter.slowDown();
+    }
+
+    public void accelerateHeli() {
+        helicopter.speedUp();
+    }
+
+    public void steerLeft() {
+        helicopter.steerLeft();
+    }
+
+    public void steerRight() {
+        helicopter.steerRight();
+    }
+
+    public void drinkWater() {
+        helicopter.drinkWater();
+    }
+
+    public void fightFire() {
+        ArrayList<Fire> fires = new ArrayList<>();
+        for (GameObject go: getGameObjectCollection()) {
+            if(go instanceof Fire) {
+                fires.add((Fire)go);
+            }
+        }
+        helicopter.fightFire(fires);
     }
 }
