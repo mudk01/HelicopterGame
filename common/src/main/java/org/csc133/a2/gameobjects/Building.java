@@ -5,7 +5,9 @@ import com.codename1.ui.Graphics;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
 
-public class Building extends GameObject{
+import java.util.Random;
+
+public class Building extends Fixed{
     private Point location;
     private Dimension dimension;
     private int value, damage;
@@ -16,6 +18,7 @@ public class Building extends GameObject{
         dimension = new Dimension(dimensions.getWidth(),
                 dimensions.getHeight());
         this.location = new Point(loc.getX(), loc.getY());
+        value = new Random().nextInt(1000) + 100;
     }
 
 
@@ -25,9 +28,16 @@ public class Building extends GameObject{
 
     @Override
     public void draw(Graphics g, Point containerOrigin) {
+        int xInfoOffset = 10;
         g.setColor(color);
         g.drawRect(containerOrigin.getX() + location.getX(),
                 containerOrigin.getY() + location.getY(),
                 dimension.getWidth(), dimension.getHeight(), 5);
+        g.drawString("V: " + value,
+                location.getX() + dimension.getWidth() + xInfoOffset,
+                containerOrigin.getY() + location.getY() + dimension.getHeight() - worldSize.getHeight()/15);
+        g.drawString("D: " + damage,
+                location.getX() + dimension.getWidth() + xInfoOffset,
+                containerOrigin.getY() + location.getY() + dimension.getHeight() - worldSize.getHeight()/32);
     }
 }
