@@ -9,7 +9,7 @@ import org.csc133.a2.Game;
 
 import java.awt.*;
 
-public class River extends GameObject{
+public class River extends Fixed{
     private int width, height, x, y;
     private Point location;
 

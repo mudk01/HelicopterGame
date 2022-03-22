@@ -6,7 +6,7 @@ import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
 import org.csc133.a2.Game;
 
-public class Helipad extends GameObject{
+public class Helipad extends Fixed{
     private Point rectangleLocation, centerLocation;
     private int boxSize;
     private int circleSize, radius;
@@ -17,7 +17,6 @@ public class Helipad extends GameObject{
         this.color = ColorUtil.rgb(139,139,139);
         dimension = new Dimension(this.worldSize.getWidth(),
                 this.worldSize.getHeight());
-        System.err.println("worldSize: " + worldSize);
         boxSize = (int) (dimension.getHeight()/8.5);
         circleSize = (int) (dimension.getHeight()/11.5);
         radius = circleSize/2;
@@ -45,6 +44,5 @@ public class Helipad extends GameObject{
         g.drawArc(containerOrigin.getX() + centerLocation.getX()-radius,
                 containerOrigin.getY() + centerLocation.getY()-radius,
                 circleSize, circleSize, 0, 360);
-        System.err.println("container origin: " + containerOrigin);
     }
 }

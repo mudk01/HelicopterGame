@@ -8,7 +8,7 @@ import com.codename1.ui.geom.Point;
 
 import java.util.Random;
 
-public class Fire extends GameObject {
+public class Fire extends Fixed {
     private Point centerLocation;
     private int size, radius;
     private Font fireSizeFont;
