@@ -14,6 +14,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="HornetsHfd-A2-common" />
+    <orderEntry type="library" name="Maven: org.jetbrains:annotations:23.0.0" level="project" />
     <orderEntry type="module" module-name="HornetsHfd-A2-common" scope="TEST" production-on-test="" />
     <orderEntry type="library" name="Maven: com.codenameone:codenameone-core:7.0.57" level="project" />
     <orderEntry type="library" name="Maven: com.codenameone:codenameone-javase:7.0.57" level="project" />
