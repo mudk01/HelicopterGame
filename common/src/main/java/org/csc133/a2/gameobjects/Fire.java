@@ -13,6 +13,7 @@ public class Fire extends Fixed {
     private int size, radius;
     private Font fireSizeFont;
     private boolean isDetected;
+    private FireState currentState;
 
     public Fire(Dimension worldSize, int fireSize, Point fireLocation) {
         this.color = ColorUtil.rgb(255, 4, 252);
@@ -64,6 +65,11 @@ public class Fire extends Fixed {
         size -= water / (new Random().nextInt(7) + 8);
     }
 
+    public void setLocation(Point buildingLocation) {
+        centerLocation.setX(buildingLocation.getX() + radius);
+        centerLocation.setY(buildingLocation.getY() + radius);
+    }
+
     @Override
     public void draw(Graphics g, Point containerOrigin) {
         g.setColor(color);
@@ -73,5 +79,9 @@ public class Fire extends Fixed {
                 size, 0, 360);
         g.drawString("" + size, centerLocation.getX() + radius,
                 containerOrigin.getY() + centerLocation.getY() + radius);
+    }
+
+    public void setCurrentState(FireState state) {
+        this.currentState = state;
     }
 }
