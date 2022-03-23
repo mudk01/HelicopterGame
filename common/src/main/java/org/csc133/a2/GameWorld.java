@@ -19,9 +19,8 @@ public class GameWorld {
     private Point topBuildingLocation, rightBuildingLocation,
             leftBuildingLocation;
     private Dimension topBuildingSize, rightBuildingSize, leftBuildingSize;
-    private int fireSizeLeft, fireSizeRight, fireSizeCenter;
-    private Point fireLocationLeft, fireLocationCenter, fireLocatonRight;
-    private Fire fireLeft, fireCenter, fireRight;
+    private int fs1, fs2, fs3, fs4, fs5, fs6, fs7, fs8, fs9;
+    private Fire fire1, fire2, fire3, fire4, fire5, fire6, fire7, fire8, fire9;
     private Fires fires;
     private final int FUEL = 25000;
 
@@ -56,40 +55,44 @@ public class GameWorld {
                 rightBuildingSize);
         buildingLeft = new Building(worldSize, leftBuildingLocation,
                 leftBuildingSize);
-        fireSizeLeft = new Random().nextInt(100) +
-                worldSize.getHeight()/10;
-        fireSizeRight = new Random().nextInt(100) +
-                worldSize.getHeight()/8;
-        fireSizeCenter = new Random().nextInt(100) +
-                worldSize.getHeight()/5;
-        fireLocationLeft = new Point(new Random().nextInt(80) +
-                (int)(worldSize.getWidth()/4.5),
-                new Random().nextInt(50) +
-                        worldSize.getHeight()/3 -
-                        (int)(worldSize.getHeight()/3.5));
-        fireLocationCenter = new Point(new Random().nextInt(80) +
-                worldSize.getWidth()/2,
-                new Random().nextInt(80) +
-                        worldSize.getHeight()/2);
-        fireLocatonRight = new Point(new Random().nextInt(50) +
-                worldSize.getWidth() -
-                (int)(fireSizeCenter *1.5), new Random().nextInt(80) +
-                worldSize.getHeight()/3 -
-                (int)(worldSize.getHeight()/3.5));
-        fireLeft = new Fire(worldSize, fireSizeLeft, fireLocationLeft);
-        fireCenter = new Fire(worldSize, fireSizeRight, fireLocationCenter);
-        fireRight = new Fire(worldSize, fireSizeCenter, fireLocatonRight);
+//        fireSizeLeft = new Random().nextInt(100) +
+//                worldSize.getHeight()/10;
+//        fireSizeRight = new Random().nextInt(100) +
+//                worldSize.getHeight()/8;
+//        fireSizeCenter = new Random().nextInt(100) +
+//                worldSize.getHeight()/5;
+//        fireLocationLeft = new Point(new Random().nextInt(80) +
+//                (int)(worldSize.getWidth()/4.5),
+//                new Random().nextInt(50) +
+//                        worldSize.getHeight()/3 -
+//                        (int)(worldSize.getHeight()/3.5));
+//        fireLocationCenter = new Point(new Random().nextInt(80) +
+//                worldSize.getWidth()/2,
+//                new Random().nextInt(80) +
+//                        worldSize.getHeight()/2);
+//        fireLocatonRight = new Point(new Random().nextInt(50) +
+//                worldSize.getWidth() -
+//                (int)(fireSizeCenter *1.5), new Random().nextInt(80) +
+//                worldSize.getHeight()/3 -
+//                (int)(worldSize.getHeight()/3.5));
+//        fireLeft = new Fire(worldSize, fireSizeLeft, fireLocationLeft);
+//        fireCenter = new Fire(worldSize, fireSizeRight, fireLocationCenter);
+//        fireRight = new Fire(worldSize, fireSizeCenter, fireLocatonRight);
+        fs1 = 70;
+        fire1 = new Fire(worldSize, fs1, leftBuildingLocation);
+        buildingLeft.setFireInBuilding(fire1);
         gameObjects = new ArrayList<>();
         fires = new Fires();
-        fires.add(fireLeft);
-        fires.add(fireCenter);
-        fires.add(fireRight);
+        fires.add(fire1);
+//        fires.add(fireCenter);
+//        fires.add(fireRight);
         gameObjects.add(river);
         gameObjects.add(helipad);
         gameObjects.add(buildingTop);
         gameObjects.add(buildingRight);
         gameObjects.add(buildingLeft);
         gameObjects.add(fires);
+//        buildingLeft.setFireInBuilding(fire1);
         gameObjects.add(helicopter);
         helicopter.setFuel(FUEL);
     }
