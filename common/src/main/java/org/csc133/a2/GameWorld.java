@@ -19,9 +19,9 @@ public class GameWorld {
     private Point topBuildingLocation, rightBuildingLocation,
             leftBuildingLocation;
     private Dimension topBuildingSize, rightBuildingSize, leftBuildingSize;
-    private int fs1, fs2, fs3, fs4, fs5, fs6, fs7, fs8, fs9;
-    private Fire fire1, fire2, fire3, fire4, fire5, fire6, fire7, fire8, fire9;
+    private Fire fire;
     private Fires fires;
+    private Buildings buildings;
     private final int FUEL = 25000;
 
 
@@ -55,68 +55,49 @@ public class GameWorld {
                 rightBuildingSize);
         buildingLeft = new Building(worldSize, leftBuildingLocation,
                 leftBuildingSize);
-//        fireSizeLeft = new Random().nextInt(100) +
-//                worldSize.getHeight()/10;
-//        fireSizeRight = new Random().nextInt(100) +
-//                worldSize.getHeight()/8;
-//        fireSizeCenter = new Random().nextInt(100) +
-//                worldSize.getHeight()/5;
-//        fireLocationLeft = new Point(new Random().nextInt(80) +
-//                (int)(worldSize.getWidth()/4.5),
-//                new Random().nextInt(50) +
-//                        worldSize.getHeight()/3 -
-//                        (int)(worldSize.getHeight()/3.5));
-//        fireLocationCenter = new Point(new Random().nextInt(80) +
-//                worldSize.getWidth()/2,
-//                new Random().nextInt(80) +
-//                        worldSize.getHeight()/2);
-//        fireLocatonRight = new Point(new Random().nextInt(50) +
-//                worldSize.getWidth() -
-//                (int)(fireSizeCenter *1.5), new Random().nextInt(80) +
-//                worldSize.getHeight()/3 -
-//                (int)(worldSize.getHeight()/3.5));
-//        fireLeft = new Fire(worldSize, fireSizeLeft, fireLocationLeft);
-//        fireCenter = new Fire(worldSize, fireSizeRight, fireLocationCenter);
-//        fireRight = new Fire(worldSize, fireSizeCenter, fireLocatonRight);
-
         gameObjects = new ArrayList<>();
         fires = new Fires();
-        for(int fireIndex = 0; fireIndex < 3; fireIndex++) {
-            int fireSize = new Random().nextInt(50) + 20;
-            Fire fire1 = new Fire(worldSize, fireSize, buildingLeft);
-            Fire fire2 = new Fire(worldSize, fireSize, buildingRight);
-            Fire fire3 = new Fire(worldSize, fireSize, buildingTop);
-            fires.add(fire1);
-            fires.add(fire2);
-            fires.add(fire3);
-        }
+        buildings = new Buildings();
+        buildings.add(buildingLeft);
+        buildings.add(buildingRight);
+        buildings.add(buildingTop);
         gameObjects.add(river);
         gameObjects.add(helipad);
-        gameObjects.add(buildingTop);
-        gameObjects.add(buildingRight);
-        gameObjects.add(buildingLeft);
+        gameObjects.add(buildings);
+        for(GameObject go : gameObjects) {
+            if(go instanceof Buildings) {
+                for(Building building : buildings) {
+                    for(int i =0;i<3;i++) {
+                        fire = new Fire(worldSize, building);
+                        fires.add(fire);
+                    }
+                }
+            }
+        }
         gameObjects.add(fires);
-//        buildingLeft.setFireInBuilding(fire1);
         gameObjects.add(helicopter);
         helicopter.setFuel(FUEL);
-//        for(GameObject go : gameObjects) {
-//            for(Fire g: fires) {
-////                if(g instanceof Fire) {
-////                    if(go instanceof Building) {
-////                        ((Building) go).setFireInBuilding(g);
-////                    }
-////                }
-////                g.update();
-//                System.err.println(g);
-//            }
-////            if (go instanceof Building) {
-////                ((Building) go).setFireInBuilding();
-////            }
-//        }
+
+        int count = 1;
+        for(GameObject go : gameObjects) {
+            if(go instanceof Buildings) {
+                for(Fire fire : fires) {
+                    System.err.println(count);
+                    count++;
+                }
+            }
+        }
     }
 
     public void tick() {
         helicopter.move();
+        for(GameObject go: gameObjects) {
+            if(go instanceof Fires) {
+                for(Fire fire: fires) {
+                    fire.growFire();
+                }
+            }
+        }
     }
 
     public ArrayList<GameObject> getGameObjectCollection() {
