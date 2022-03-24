@@ -16,7 +16,8 @@ public class Fires extends GameObjectCollection<Fire>{
     @Override
     public void draw(Graphics g, Point containerOrigin) {
         for(Fire fire : getGameObjects()) {
-            fire.draw(g, containerOrigin);
+            if(fire.getCurrentState() == BurningFire.instance())
+                fire.draw(g, containerOrigin);
         }
     }
 

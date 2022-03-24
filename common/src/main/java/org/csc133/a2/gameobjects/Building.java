@@ -23,14 +23,15 @@ public class Building extends Fixed{
 
 
     public void setFireInBuilding(Fire fire) {
-        Point newFire =
-                new Point(new Random().nextInt(location.getX()) +
-                        dimension.getWidth(),
-                        new Random().nextInt(location.getY()) +
-                                dimension.getHeight());
+//        Point newFire =
+//                new Point(new Random().nextInt(location.getX()) +
+//                        dimension.getWidth(),
+//                        new Random().nextInt(location.getY()) +
+//                                dimension.getHeight());
         System.err.println("locationX: " + location.getX() + " dimW: " + dimension.getWidth() + " total=" + (location.getX()+dimension.getWidth()));
         System.err.println("locationY: " + location.getY() + " dimW: " + dimension.getHeight() + " total=" + (location.getY()+dimension.getHeight()));
-        fire.setLocation(newFire);
+//        fire.setLocation(newFire);
+        fire.update();
     }
 
     @Override

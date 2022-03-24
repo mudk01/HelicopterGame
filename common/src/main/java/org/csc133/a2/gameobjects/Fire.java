@@ -15,18 +15,22 @@ public class Fire extends Fixed {
     private boolean isDetected;
     private FireState currentState;
 
-    public Fire(Dimension worldSize, int fireSize, Point fireLocation) {
+    public Fire(Dimension worldSize, int fireSize, Building b) {
         this.color = ColorUtil.rgb(255, 4, 252);
         this.worldSize = worldSize;
         this.dimension = new Dimension(this.worldSize.getWidth(),
                 this.worldSize.getHeight());
         size = fireSize;
         radius = fireSize/2;
-        centerLocation = new Point(fireLocation.getX() + radius,
-                fireLocation.getY() + radius);
+//        centerLocation = new Point(fireLocation.getX() + radius,
+//                fireLocation.getY() + radius);
+//        centerLocation = new Point();
         fireSizeFont = Font.createSystemFont(Font.FACE_SYSTEM,
                 Font.STYLE_PLAIN, Font.SIZE_MEDIUM);
         isDetected = false;
+        this.currentState = UnStartedFire.instance();
+        System.err.println("In the fire class: " + currentState);
+        b.setFireInBuilding(this);
     }
 
     public void setTrue() {
@@ -66,8 +70,10 @@ public class Fire extends Fixed {
     }
 
     public void setLocation(Point buildingLocation) {
-        centerLocation.setX(buildingLocation.getX() + radius);
-        centerLocation.setY(buildingLocation.getY() + radius);
+        centerLocation = new Point((buildingLocation.getX() + radius),
+                (buildingLocation.getY() + radius));
+//        centerLocation.setX(buildingLocation.getX() + radius);
+//        centerLocation.setY(buildingLocation.getY() + radius);
     }
 
     @Override
@@ -83,5 +89,13 @@ public class Fire extends Fixed {
 
     public void setCurrentState(FireState state) {
         this.currentState = state;
+    }
+
+    public FireState getCurrentState() {
+        return currentState;
+    }
+
+    public void update() {
+        this.currentState.updateState(this);
     }
 }

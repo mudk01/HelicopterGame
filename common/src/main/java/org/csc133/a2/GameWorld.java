@@ -78,14 +78,18 @@ public class GameWorld {
 //        fireLeft = new Fire(worldSize, fireSizeLeft, fireLocationLeft);
 //        fireCenter = new Fire(worldSize, fireSizeRight, fireLocationCenter);
 //        fireRight = new Fire(worldSize, fireSizeCenter, fireLocatonRight);
-        fs1 = 70;
-        fire1 = new Fire(worldSize, fs1, leftBuildingLocation);
-        buildingLeft.setFireInBuilding(fire1);
+
         gameObjects = new ArrayList<>();
         fires = new Fires();
-        fires.add(fire1);
-//        fires.add(fireCenter);
-//        fires.add(fireRight);
+        for(int fireIndex = 0; fireIndex < 3; fireIndex++) {
+            int fireSize = new Random().nextInt(50) + 20;
+            Fire fire1 = new Fire(worldSize, fireSize, buildingLeft);
+            Fire fire2 = new Fire(worldSize, fireSize, buildingRight);
+            Fire fire3 = new Fire(worldSize, fireSize, buildingTop);
+            fires.add(fire1);
+            fires.add(fire2);
+            fires.add(fire3);
+        }
         gameObjects.add(river);
         gameObjects.add(helipad);
         gameObjects.add(buildingTop);
@@ -95,11 +99,24 @@ public class GameWorld {
 //        buildingLeft.setFireInBuilding(fire1);
         gameObjects.add(helicopter);
         helicopter.setFuel(FUEL);
+//        for(GameObject go : gameObjects) {
+//            for(Fire g: fires) {
+////                if(g instanceof Fire) {
+////                    if(go instanceof Building) {
+////                        ((Building) go).setFireInBuilding(g);
+////                    }
+////                }
+////                g.update();
+//                System.err.println(g);
+//            }
+////            if (go instanceof Building) {
+////                ((Building) go).setFireInBuilding();
+////            }
+//        }
     }
 
     public void tick() {
         helicopter.move();
-
     }
 
     public ArrayList<GameObject> getGameObjectCollection() {
