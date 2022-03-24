@@ -9,6 +9,6 @@ abstract class Moveable extends GameObject {
         super();
     }
 
-    void move() {
+    public void move() {
     }
 }

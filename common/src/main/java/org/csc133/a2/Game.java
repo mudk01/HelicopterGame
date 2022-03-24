@@ -9,6 +9,7 @@ import com.codename1.ui.util.UITimer;
 import org.csc133.a2.views.ControlCluster;
 import org.csc133.a2.views.MapView;
 import org.csc133.a2.views.GlassCockpit;
+import org.csc133.a2.commands.*;
 
 
 public class Game extends Form implements Runnable {
@@ -36,12 +37,12 @@ public class Game extends Form implements Runnable {
         controlCluster = new ControlCluster(gw);
 
 
-        addKeyListener(-92, (evt) -> gw.input(-92));
-        addKeyListener(-91, (evt) -> gw.input(-91));
-        addKeyListener(-94, (evt) -> gw.input(-94));
-        addKeyListener(-93, (evt) -> gw.input(-93));
-        addKeyListener('d', (evt) -> gw.input('d'));
-        addKeyListener('f', (evt) -> gw.input('f'));
+        addKeyListener(-92, new DecelerateCommand(gw));
+        addKeyListener(-91, new AccelerateCommand(gw));
+        addKeyListener(-94, new SteerRightCommand(gw));
+        addKeyListener(-93, new SteerLeftCommand(gw));
+        addKeyListener('d', new DrinkCommand(gw));
+        addKeyListener('f', new FightCommand(gw));
 
         this.setLayout(new BorderLayout());
         this.add(BorderLayout.NORTH, glassCockpit);
