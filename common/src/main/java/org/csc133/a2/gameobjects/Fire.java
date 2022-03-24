@@ -15,16 +15,17 @@ public class Fire extends Fixed {
     private boolean isDetected;
     private FireState currentState;
 
-    public Fire(Dimension worldSize, int fireSize, Building b) {
+    private static Fire fire = new Fire();
+
+    public Fire() {}
+
+    public Fire(Dimension worldSize, Building b) {
         this.color = ColorUtil.rgb(255, 4, 252);
         this.worldSize = worldSize;
         this.dimension = new Dimension(this.worldSize.getWidth(),
                 this.worldSize.getHeight());
-        size = fireSize;
-        radius = fireSize/2;
-//        centerLocation = new Point(fireLocation.getX() + radius,
-//                fireLocation.getY() + radius);
-//        centerLocation = new Point();
+        size = new Random().nextInt(10) + 30;
+        radius = size/2;
         fireSizeFont = Font.createSystemFont(Font.FACE_SYSTEM,
                 Font.STYLE_PLAIN, Font.SIZE_MEDIUM);
         isDetected = false;
@@ -45,7 +46,7 @@ public class Fire extends Fixed {
         return isDetected;
     }
 
-    void growFire() {
+    public void growFire() {
         int move = new Random().nextInt(2);
         size += move;
         radius = size/2;
@@ -98,4 +99,9 @@ public class Fire extends Fixed {
     public void update() {
         this.currentState.updateState(this);
     }
+
+    public void start() {
+        update();
+    }
+
 }

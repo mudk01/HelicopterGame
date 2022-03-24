@@ -21,17 +21,20 @@ public class Building extends Fixed{
         value = new Random().nextInt(1000) + 100;
     }
 
-
     public void setFireInBuilding(Fire fire) {
-//        Point newFire =
-//                new Point(new Random().nextInt(location.getX()) +
-//                        dimension.getWidth(),
-//                        new Random().nextInt(location.getY()) +
-//                                dimension.getHeight());
+        if(dimension.getWidth() != 0 && dimension.getHeight() != 0) {
+            Point newFire =
+                new Point(new Random().nextInt(dimension.getWidth()-15) +
+                        location.getX(),
+                        new Random().nextInt(dimension.getHeight()-15) +
+                                location.getY());
+            fire.setLocation(newFire);
+            fire.start();
+        }
+//        Point newFire = new Point(x, y);
         System.err.println("locationX: " + location.getX() + " dimW: " + dimension.getWidth() + " total=" + (location.getX()+dimension.getWidth()));
         System.err.println("locationY: " + location.getY() + " dimW: " + dimension.getHeight() + " total=" + (location.getY()+dimension.getHeight()));
-//        fire.setLocation(newFire);
-        fire.update();
+
     }
 
     @Override
