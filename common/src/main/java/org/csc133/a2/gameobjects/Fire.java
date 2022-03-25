@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Fire extends Fixed {
     private Point centerLocation;
-    private int size, radius;
+    private int size, radius, growth;
     private Font fireSizeFont;
     private boolean isDetected;
     private FireState currentState;
@@ -47,11 +47,11 @@ public class Fire extends Fixed {
     }
 
     public void growFire() {
-        int move = new Random().nextInt(2);
-        size += move;
+        growth = new Random().nextInt(2);
+        size += growth;
         radius = size/2;
-        centerLocation.setX(centerLocation.getX() - (int)(move/2));
-        centerLocation.setY(centerLocation.getY() - (int)(move/2));
+        centerLocation.setX(centerLocation.getX() - (int)(growth/2));
+        centerLocation.setY(centerLocation.getY() - (int)(growth/2));
     }
 
     public Point getFireLocation() {
@@ -73,8 +73,6 @@ public class Fire extends Fixed {
     public void setLocation(Point buildingLocation) {
         centerLocation = new Point((buildingLocation.getX() + radius),
                 (buildingLocation.getY() + radius));
-//        centerLocation.setX(buildingLocation.getX() + radius);
-//        centerLocation.setY(buildingLocation.getY() + radius);
     }
 
     @Override

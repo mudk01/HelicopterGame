@@ -91,10 +91,15 @@ public class GameWorld {
 
     public void tick() {
         helicopter.move();
+        int fireCount = 0;
+        int chosenFire = new Random().nextInt(9);
         for(GameObject go: gameObjects) {
             if(go instanceof Fires) {
                 for(Fire fire: fires) {
+                    if(chosenFire == fireCount) {
                     fire.growFire();
+                }
+                fireCount++;
                 }
             }
         }
