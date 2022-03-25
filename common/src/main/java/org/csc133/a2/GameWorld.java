@@ -1,5 +1,6 @@
 package org.csc133.a2;
 
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import org.csc133.a2.gameobjects.*;
 
@@ -20,14 +21,13 @@ public class GameWorld {
             leftBuildingLocation;
     private Dimension topBuildingSize, rightBuildingSize, leftBuildingSize;
     private Fire fire;
-    private Fires fires;
+    private Fires fires, deadFires;
     private Buildings buildings;
     private final int FUEL = 25000;
 
 
     public GameWorld() {
         worldSize = new Dimension();
-        init();
     }
 
     public void init() {
@@ -101,7 +101,46 @@ public class GameWorld {
                 }
                 fireCount++;
                 }
+                if(helicopter.checkFireCollision(fire)) {
+                    fire.setTrue();
+                } else {
+                    fire.setFalse();
+                }
+                if(fire.getSize() <= 0) {
+                    fires.remove(fire);
+                }
             }
+        }
+        if(fires.size() && helicopter.isOnPad()) {
+            gameWon();
+        }
+        helicopter.checkRiverCollision(river.getLocation(), river.getWidth(),
+                river.getHeight());
+        System.err.println(helicopter.checkRiverCollisionBool(river.getLocation(), river.getWidth(),
+                river.getHeight()));
+        if(helicopter.checkFuel()) {
+            endGame();
+        }
+    }
+
+    private void gameWon() {
+        if(Dialog.show("Congratulations!",
+                "You put out all the fires!\n Score: "+helicopter.getFuel(),
+                "Replay", "Exit")) {
+            init();
+        }
+        else {
+            Display.getInstance().exitApplication();
+        }
+    }
+
+    private void endGame() {
+        if(Dialog.show("Game Over", "You ran out of fuel",
+                "Replay", "Exit")) {
+            init();
+        }
+        else {
+            Display.getInstance().exitApplication();
         }
     }
 
@@ -126,29 +165,29 @@ public class GameWorld {
         this.worldSize = worldSize;
     }
 
-    public void input(int input) {
-        switch (input) {
-            case -92:
-                helicopter.slowDown();
-                break;
-            case -91:
-                helicopter.speedUp();
-                break;
-            case -93:
-                helicopter.steerLeft();
-                break;
-            case -94:
-                helicopter.steerRight();
-                break;
-            case 'd':
-                helicopter.drinkWater();
-                break;
-            case 'f':
-//                helicopter.fightFire(fires);
-                helicopter.dropWater();
-                break;
-        }
-    }
+//    public void input(int input) {
+//        switch (input) {
+//            case -92:
+//                helicopter.slowDown();
+//                break;
+//            case -91:
+//                helicopter.speedUp();
+//                break;
+//            case -93:
+//                helicopter.steerLeft();
+//                break;
+//            case -94:
+//                helicopter.steerRight();
+//                break;
+//            case 'd':
+//                helicopter.drinkWater();
+//                break;
+//            case 'f':
+////                helicopter.fightFire(fires);
+//                helicopter.dropWater();
+//                break;
+//        }
+//    }
 
     public void exitApplication() {
         Display.getInstance().exitApplication();
@@ -182,5 +221,17 @@ public class GameWorld {
             }
         }
         helicopter.fightFire(fires);
+    }
+
+    public int getFireCount() {
+        int count = 0;
+        for(GameObject go : gameObjects) {
+            if(go instanceof Fires) {
+                for(Fire fire : fires) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }
