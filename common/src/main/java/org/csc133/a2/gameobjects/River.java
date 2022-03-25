@@ -10,7 +10,7 @@ import org.csc133.a2.Game;
 import java.awt.*;
 
 public class River extends Fixed{
-    private int width, height, x, y;
+    private int x, y;
     private Point location;
 
 
@@ -24,11 +24,23 @@ public class River extends Fixed{
 
     }
 
+    public Point getLocation() {
+        return location;
+    }
+
+    public int getWidth() {
+        return dimension.getWidth();
+    }
+
+    public int getHeight() {
+        return dimension.getHeight();
+    }
+
     @Override
     public void draw(Graphics g, Point containerOrigin) {
         g.setColor(color);
-        x = containerOrigin.getX() + location.getX();
-        y = containerOrigin.getY() + location.getY()-height;
+        x = location.getX();
+        y = containerOrigin.getY() + location.getY()-dimension.getHeight();
 
         g.drawRect(x,y,dimension.getWidth(),dimension.getHeight(),5);
     }
