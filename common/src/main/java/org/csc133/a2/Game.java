@@ -37,7 +37,6 @@ public class Game extends Form implements Runnable {
         glassCockpit = new GlassCockpit(gw);
         controlCluster = new ControlCluster(gw);
 
-
         addKeyListener(-92, new DecelerateCommand(gw));
         addKeyListener(-91, new AccelerateCommand(gw));
         addKeyListener(-94, new SteerRightCommand(gw));
