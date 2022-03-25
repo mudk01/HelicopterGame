@@ -31,8 +31,9 @@ public class Game extends Form implements Runnable {
 
     public Game() {
         gw = new GameWorld();
-        this.getStyle().setBgColor(ColorUtil.rgb(0, 0, 0));
         mapView = new MapView(gw);
+        mapView.getStyle().setBgColor(ColorUtil.rgb(0, 0, 0));
+        mapView.getStyle().setBgTransparency(255);
         glassCockpit = new GlassCockpit(gw);
         controlCluster = new ControlCluster(gw);
 

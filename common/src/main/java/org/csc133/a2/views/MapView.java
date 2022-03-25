@@ -24,8 +24,8 @@ public class MapView extends Container {
 
     @Override
     public void paint(Graphics g) {
+        this.getStyle().setBgColor(ColorUtil.rgb(0, 0, 0));
         super.paint(g);
-
         for(GameObject go: gw.getGameObjectCollection()) {
             go.draw(g, new Point(this.getX(), this.getY()));
         }

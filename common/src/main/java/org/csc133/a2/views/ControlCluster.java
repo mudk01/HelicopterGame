@@ -15,18 +15,18 @@ import javax.swing.border.Border;
 public class ControlCluster extends Container {
     GameWorld gw;
     Button left, right, fight, exit, drink, brake, accelerate;
-    Container leftCont, rightCont, fightCont, exitCont, drinkCont, brakeCont,
-            accelCont;
+    Container leftCont, rightCont, exitCont;
     public ControlCluster(GameWorld gw) {
         this.gw = gw;
-
-        this.getStyle().setBgColor(ColorUtil.rgb(255,255,255));
-        this.getStyle().setBgTransparency(255);
         this.setLayout(new BorderLayout());
+        this.getStyle().setBgColor(ColorUtil.rgb(0,0,0));
 
         leftCont = new Container(new BorderLayout());
+        leftCont.getStyle().setBgTransparency(255);
         rightCont = new Container(new BorderLayout());
+        rightCont.getStyle().setBgTransparency(255);
         exitCont = new Container(new BorderLayout());
+        exitCont.getStyle().setBgTransparency(255);
 
         left = new Button("Left");
         right = new Button("Right");
