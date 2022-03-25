@@ -78,14 +78,23 @@ public class Helicopter extends Moveable implements Steerable {
         endHeadY = (int) (centerY - Math.sin(angle) * size*2);
     }
 
-    void checkRiverCollision(Point location, int width, int height) {
+    public void checkRiverCollision(Point location, int width, int height) {
         riverCollision = (centerX >= location.getX() && centerY >=
                 location.getY()) &&
                 (centerX <= (location.getX() + width) && centerY <=
                         (location.getY() + height));
     }
 
-    boolean checkFireCollision(Fire fire) {
+    public boolean checkRiverCollisionBool(Point location, int width,
+                                         int height) {
+        riverCollision = (centerX >= location.getX() && centerY >=
+                location.getY()) &&
+                (centerX <= (location.getX() + width) && centerY <=
+                        (location.getY() + height));
+        return riverCollision;
+    }
+
+    public boolean checkFireCollision(Fire fire) {
         return (centerX >= (fire.getFireLocation().getX() - fire.getRadius()) &&
                 centerY >= (fire.getFireLocation().getY() - fire.getRadius()))
                 && (centerX <= (fire.getFireLocation().getX() +
