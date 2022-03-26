@@ -8,7 +8,7 @@ import com.codename1.ui.geom.Point;
 import java.util.Random;
 
 public class Building extends Fixed{
-    private Point location;
+    private Point location, newFireLocation;
     private Dimension dimension;
     private int value, damage;
 
@@ -23,18 +23,14 @@ public class Building extends Fixed{
 
     public void setFireInBuilding(Fire fire) {
         if(dimension.getWidth() != 0 && dimension.getHeight() != 0) {
-            Point newFire =
+            newFireLocation =
                 new Point(new Random().nextInt(dimension.getWidth()-15) +
                         location.getX(),
                         new Random().nextInt(dimension.getHeight()-15) +
                                 location.getY());
-            fire.setLocation(newFire);
+            fire.setLocation(newFireLocation);
             fire.start();
         }
-//        Point newFire = new Point(x, y);
-        System.err.println("locationX: " + location.getX() + " dimW: " + dimension.getWidth() + " total=" + (location.getX()+dimension.getWidth()));
-        System.err.println("locationY: " + location.getY() + " dimW: " + dimension.getHeight() + " total=" + (location.getY()+dimension.getHeight()));
-
     }
 
     @Override
