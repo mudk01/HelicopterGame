@@ -154,7 +154,7 @@ public class Helicopter extends Moveable implements Steerable {
         return currSpeed;
     }
 
-    public double getHeading() {
-        return Math.toRadians(angle);
+    public int getHeading() {
+        return (int)(Math.round(Math.toDegrees(angle)));
     }
 }
