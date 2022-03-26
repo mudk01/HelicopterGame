@@ -111,13 +111,11 @@ public class GameWorld {
                 }
             }
         }
-        if(fires.size() && helicopter.isOnPad()) {
+        if(getFireCount() == 0 && helicopter.isOnPad()) {
             gameWon();
         }
         helicopter.checkRiverCollision(river.getLocation(), river.getWidth(),
                 river.getHeight());
-        System.err.println(helicopter.checkRiverCollisionBool(river.getLocation(), river.getWidth(),
-                river.getHeight()));
         if(helicopter.checkFuel()) {
             endGame();
         }
@@ -224,14 +222,6 @@ public class GameWorld {
     }
 
     public int getFireCount() {
-        int count = 0;
-        for(GameObject go : gameObjects) {
-            if(go instanceof Fires) {
-                for(Fire fire : fires) {
-                    count++;
-                }
-            }
-        }
-        return count;
+        return fires.getSize();
     }
 }

@@ -22,6 +22,10 @@ public class MapView extends Container {
         gw.init();
     }
 
+    public Point getContainerPoint() {
+        return new Point(this.getX(), this.getY());
+    }
+
     @Override
     public void paint(Graphics g) {
         this.getStyle().setBgColor(ColorUtil.rgb(0, 0, 0));

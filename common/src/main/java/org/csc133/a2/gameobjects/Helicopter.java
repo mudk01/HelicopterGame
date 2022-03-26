@@ -4,7 +4,9 @@ import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
+import org.csc133.a2.GameWorld;
 import org.csc133.a2.interfaces.Steerable;
+import org.csc133.a2.views.MapView;
 
 import java.util.ArrayList;
 
@@ -85,14 +87,14 @@ public class Helicopter extends Moveable implements Steerable {
                         (location.getY() + height));
     }
 
-    public boolean checkRiverCollisionBool(Point location, int width,
-                                         int height) {
-        riverCollision = (centerX >= location.getX() && centerY >=
-                location.getY()) &&
-                (centerX <= (location.getX() + width) && centerY <=
-                        (location.getY() + height));
-        return riverCollision;
-    }
+//    public boolean checkRiverCollisionBool(Point location, int width,
+//                                         int height) {
+//        riverCollision = (centerX >= (location.getX()) && centerY >=
+//                location.getY()) &&
+//                (centerX <= (location.getX() + width) && centerY <=
+//                        (location.getY() + height));
+//        return riverCollision;
+//    }
 
     public boolean checkFireCollision(Fire fire) {
         return (centerX >= (fire.getFireLocation().getX() - fire.getRadius()) &&

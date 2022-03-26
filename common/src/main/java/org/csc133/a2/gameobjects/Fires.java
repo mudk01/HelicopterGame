@@ -13,13 +13,6 @@ public class Fires extends GameObjectCollection<Fire>{
         this.color = ColorUtil.rgb(255,0,0);
     }
 
-    public boolean size() {
-        if(this.getGameObjects().isEmpty()) {
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public void draw(Graphics g, Point containerOrigin) {
         for(Fire fire : getGameObjects()) {
