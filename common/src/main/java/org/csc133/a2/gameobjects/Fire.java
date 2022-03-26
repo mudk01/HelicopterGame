@@ -30,7 +30,6 @@ public class Fire extends Fixed {
                 Font.STYLE_PLAIN, Font.SIZE_MEDIUM);
         isDetected = false;
         this.currentState = UnStartedFire.instance();
-        System.err.println("In the fire class: " + currentState);
         b.setFireInBuilding(this);
     }
 
@@ -79,11 +78,13 @@ public class Fire extends Fixed {
     public void draw(Graphics g, Point containerOrigin) {
         g.setColor(color);
         g.setFont(fireSizeFont);
-        g.fillArc(centerLocation.getX()-radius,
-                containerOrigin.getY() + centerLocation.getY() - radius, size,
-                size, 0, 360);
-        g.drawString("" + size, centerLocation.getX() + radius,
-                containerOrigin.getY() + centerLocation.getY() + radius);
+        if(size > 0) {
+            g.fillArc(centerLocation.getX() - radius,
+                    containerOrigin.getY() + centerLocation.getY() - radius, size,
+                    size, 0, 360);
+            g.drawString("" + size, centerLocation.getX() + radius,
+                    containerOrigin.getY() + centerLocation.getY() + radius);
+        }
     }
 
     public void setCurrentState(FireState state) {
@@ -100,6 +101,10 @@ public class Fire extends Fixed {
 
     public void start() {
         update();
+    }
+
+    public void extinguishFire() {
+        this.update();
     }
 
 }
