@@ -47,7 +47,7 @@ public class GlassCockpit extends Container {
         fires.setText(String.valueOf(gw.getFireCount()));
         fireSize.setText(gw.getFireSize());
         damage.setText(gw.getTotalAverageDamage());
-
+        loss.setText(gw.getFinancialLoss());
 
     }
 }

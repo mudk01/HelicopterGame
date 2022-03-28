@@ -27,6 +27,7 @@ public class GameWorld {
     private int fireArea, area, fireSize;
     private int tickCount, buildingCount, averageBuildingDamage,
     remainingAreaSize, buildingDamage;
+    private double financialLoss;
     private ArrayList<Integer> initialAreas;
 
     private static GameWorld gameWorld;
@@ -217,7 +218,10 @@ public class GameWorld {
     }
 
     public void exitApplication() {
-        Display.getInstance().exitApplication();
+        if(Dialog.show("Confirm", "Do you want to Quit?", "OK",
+                "Cancel")) {
+            Display.getInstance().exitApplication();
+        }
     }
 
     public void decelerateHeli() {
@@ -269,7 +273,19 @@ public class GameWorld {
                 }
             }
         }
-        averageBuildingDamage = Math.round(averageBuildingDamage /3);
+        averageBuildingDamage = Math.round(averageBuildingDamage/3);
         return String.valueOf(averageBuildingDamage);
+    }
+
+    public String getFinancialLoss() {
+        financialLoss = 0.0;
+        for(GameObject go : gameObjects) {
+            if(go instanceof Buildings) {
+                for(Building building : buildings) {
+                    financialLoss += ((building.getDamage())/100.0) * building.getValue();
+                }
+            }
+        }
+        return String.valueOf((int)financialLoss);
     }
 }

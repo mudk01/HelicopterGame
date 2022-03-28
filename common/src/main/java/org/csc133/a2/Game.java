@@ -32,6 +32,8 @@ public class Game extends Form implements Runnable {
         addKeyListener(-93, new SteerLeftCommand(gw));
         addKeyListener('d', new DrinkCommand(gw));
         addKeyListener('f', new FightCommand(gw));
+        addKeyListener('Q', new ExitCommand(gw));
+
 
         this.setLayout(new BorderLayout());
         this.add(BorderLayout.NORTH, glassCockpit);
