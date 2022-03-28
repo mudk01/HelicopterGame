@@ -24,8 +24,9 @@ public class GameWorld {
     private Fires fires, deadFires;
     private Buildings buildings;
     private final int FUEL = 25000;
-    private int fireArea, area, initArea;
-    private int tickCount;
+    private int fireArea, area, fireSize;
+    private int tickCount, buildingCount, averageBuildingDamage,
+    remainingAreaSize, buildingDamage;
     private ArrayList<Integer> initialAreas;
 
     private static GameWorld gameWorld;
@@ -84,17 +85,16 @@ public class GameWorld {
     }
 
     public void tick() {
-        int counti = 0;
+        buildingCount = 0;
         for(GameObject go : gameObjects) {
             if(go instanceof Buildings) {
                 for(Building b : buildings) {
-                    int damage = 0;
+                    buildingDamage = 0;
                     for(Fire fire : b.getFires()) {
-                        damage += fire.getArea();
+                        buildingDamage += fire.getArea();
                     }
-                    System.err.println("damage at building " + counti + "is: " + (damage-initialAreas.get(counti))/b.getValue());
-                    b.setDamage(((damage-initialAreas.get(counti))/b.getValue()));
-                    counti++;
+                    b.setDamage(((buildingDamage-initialAreas.get(buildingCount))/b.getValue()));
+                    buildingCount++;
                 }
             }
         }
@@ -161,9 +161,9 @@ public class GameWorld {
             if(go instanceof Buildings) {
                 for(Building building: buildings) {
                     if(area != fireArea) {
-                        int remSize =
+                        remainingAreaSize =
                                 (int)Math.sqrt(Math.ceil((fireArea - area)/Math.PI)) * 2;
-                        fire = new Fire(worldSize, remSize);
+                        fire = new Fire(worldSize, remainingAreaSize);
                         fires.add(fire);
                         building.setFires(fire);
                         fire.setFire(building);
@@ -247,5 +247,28 @@ public class GameWorld {
 
     public int getFireCount() {
         return fires.getSize();
+    }
+
+    public String getFireSize() {
+        for(GameObject go : gameObjects) {
+            if(go instanceof Fires) {
+                for(Fire fire : fires) {
+                    fireSize += fire.getSize();
+                }
+            }
+        }
+        return String.valueOf(fireSize);
+    }
+
+    public String getTotalAverageDamage() {
+        for(GameObject go : gameObjects) {
+            if(go instanceof Buildings) {
+                for(Building building : buildings) {
+                    averageBuildingDamage = building.getDamage();
+                }
+            }
+        }
+        averageBuildingDamage = Math.round(averageBuildingDamage /3);
+        return String.valueOf(averageBuildingDamage);
     }
 }
