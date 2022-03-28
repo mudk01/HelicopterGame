@@ -11,6 +11,7 @@ public class Building extends Fixed{
     private Point location, newFireLocation;
     private Dimension dimension;
     private int value, damage;
+    private Fires fires;
 
     public Building(Dimension worldSize, Point loc, Dimension dimensions) {
         this.color = ColorUtil.rgb(255,0,0);
@@ -18,7 +19,9 @@ public class Building extends Fixed{
         dimension = new Dimension(dimensions.getWidth(),
                 dimensions.getHeight());
         this.location = new Point(loc.getX(), loc.getY());
-        value = new Random().nextInt(1000) + 100;
+        value = new Random().nextInt(900) + 101;
+        System.err.println(value + "is value");
+        fires = new Fires();
     }
 
     public void setFireInBuilding(Fire fire) {
@@ -33,6 +36,22 @@ public class Building extends Fixed{
         }
     }
 
+    public int getValue(){
+        return value;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = Math.max(damage, this.damage);
+    }
+
+    public void setFires(Fire fire) {
+        fires.add(fire);
+    }
+
+    public Fires getFires() {
+        return fires;
+    }
+
     @Override
     public void draw(Graphics g, Point containerOrigin) {
         int xInfoOffset = 10;
@@ -43,8 +62,9 @@ public class Building extends Fixed{
         g.drawString("V: " + value,
                 location.getX() + dimension.getWidth() + xInfoOffset,
                 containerOrigin.getY() + location.getY() + dimension.getHeight() - worldSize.getHeight()/15);
-        g.drawString("D: " + damage,
+        g.drawString("D: " + damage +"%",
                 location.getX() + dimension.getWidth() + xInfoOffset,
                 containerOrigin.getY() + location.getY() + dimension.getHeight() - worldSize.getHeight()/32);
     }
+
 }
