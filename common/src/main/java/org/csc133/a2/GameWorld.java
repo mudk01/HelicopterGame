@@ -250,6 +250,7 @@ public class GameWorld {
     }
 
     public String getFireSize() {
+        fireSize = 0;
         for(GameObject go : gameObjects) {
             if(go instanceof Fires) {
                 for(Fire fire : fires) {
