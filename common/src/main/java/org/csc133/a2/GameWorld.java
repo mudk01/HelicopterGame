@@ -24,6 +24,7 @@ public class GameWorld {
     private Fires fires, deadFires;
     private Buildings buildings;
     private final int FUEL = 25000;
+    private int fireArea, area;
 
 
     public GameWorld() {
@@ -64,12 +65,33 @@ public class GameWorld {
         gameObjects.add(river);
         gameObjects.add(helipad);
         gameObjects.add(buildings);
+        fireArea = 1000;
+        area = 0;
         for(GameObject go : gameObjects) {
             if(go instanceof Buildings) {
                 for(Building building : buildings) {
-                    for(int i =0;i<3;i++) {
-                        fire = new Fire(worldSize, building);
+                    int randomFiresInBuilding = new Random().nextInt(2) + 1;
+                    for(int i =0;i<randomFiresInBuilding;i++) {
+                        int size =
+                            new Random().nextInt(4) + 10;
+                        fire = new Fire(worldSize, size);
+                        area += fire.getArea();
                         fires.add(fire);
+                        fire.setFire(building);
+                    }
+                }
+            }
+        }
+        for(GameObject go : gameObjects) {
+            if(go instanceof Buildings) {
+                for(Building building: buildings) {
+                    if(area != fireArea) {
+                        int remSize =
+                                (int)Math.sqrt((fireArea - area)/Math.PI) * 2;
+                        fire = new Fire(worldSize, remSize);
+                        fires.add(fire);
+                        fire.setFire(building);
+                        area+=fire.getArea();
                     }
                 }
             }
