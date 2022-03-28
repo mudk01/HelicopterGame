@@ -24,9 +24,10 @@ public class GameWorld {
     private Fires fires, deadFires;
     private Buildings buildings;
     private final int FUEL = 25000;
-    private int fireArea, area, fireSize;
+    private int fireArea, area, fireSize, size;
     private int tickCount, buildingCount, averageBuildingDamage,
-    remainingAreaSize, buildingDamage;
+    remainingAreaSize, buildingDamage, randomFiresInBuilding, fireCount,
+            chosenFire;
     private double financialLoss;
     private ArrayList<Integer> initialAreas;
 
@@ -41,7 +42,6 @@ public class GameWorld {
     }
 
     public void init() {
-        tickCount = 0;
         initialAreas = new ArrayList<>();
         river = new River(worldSize);
         helipad = new Helipad(worldSize);
@@ -100,8 +100,8 @@ public class GameWorld {
             }
         }
         helicopter.move();
-        int fireCount = 0;
-        int chosenFire = new Random().nextInt(getFireCount());
+        fireCount = 0;
+        chosenFire = new Random().nextInt(getFireCount());
         for(GameObject go: gameObjects) {
             if(go instanceof Fires) {
                 for (Fire fire : fires) {
@@ -131,16 +131,16 @@ public class GameWorld {
             endGame();
         }
         tickCount++;
+        System.err.println(tickCount);
     }
 
     private void createFiresInBuilding(){
         for(GameObject go : gameObjects) {
             if(go instanceof Buildings) {
                 for(Building building : buildings) {
-                    int randomFiresInBuilding = new Random().nextInt(2) + 2;
+                    randomFiresInBuilding = new Random().nextInt(2) + 2;
                     for(int i =0;i<randomFiresInBuilding;i++) {
-                        int size =
-                                new Random().nextInt(4) + 10;
+                        size = new Random().nextInt(4) + 10;
                         fire = new Fire(worldSize, size);
                         area += fire.getArea();
                         fires.add(fire);
