@@ -26,9 +26,14 @@ public class GameWorld {
     private final int FUEL = 25000;
     private int fireArea, area;
 
+    private static GameWorld gameWorld;
 
-    public GameWorld() {
-        worldSize = new Dimension();
+    private GameWorld() {}
+
+    public static GameWorld getInstance() {
+        gameWorld = new GameWorld();
+        gameWorld.worldSize = new Dimension();
+        return gameWorld;
     }
 
     public void init() {
@@ -67,35 +72,8 @@ public class GameWorld {
         gameObjects.add(buildings);
         fireArea = 1000;
         area = 0;
-        for(GameObject go : gameObjects) {
-            if(go instanceof Buildings) {
-                for(Building building : buildings) {
-                    int randomFiresInBuilding = new Random().nextInt(2) + 1;
-                    for(int i =0;i<randomFiresInBuilding;i++) {
-                        int size =
-                            new Random().nextInt(4) + 10;
-                        fire = new Fire(worldSize, size);
-                        area += fire.getArea();
-                        fires.add(fire);
-                        fire.setFire(building);
-                    }
-                }
-            }
-        }
-        for(GameObject go : gameObjects) {
-            if(go instanceof Buildings) {
-                for(Building building: buildings) {
-                    if(area != fireArea) {
-                        int remSize =
-                                (int)Math.sqrt((fireArea - area)/Math.PI) * 2;
-                        fire = new Fire(worldSize, remSize);
-                        fires.add(fire);
-                        fire.setFire(building);
-                        area+=fire.getArea();
-                    }
-                }
-            }
-        }
+        createFiresInBuilding();
+        checkFireBudget();
         gameObjects.add(fires);
         gameObjects.add(helicopter);
         helicopter.setFuel(FUEL);
@@ -104,7 +82,7 @@ public class GameWorld {
     public void tick() {
         helicopter.move();
         int fireCount = 0;
-        int chosenFire = new Random().nextInt(9);
+        int chosenFire = new Random().nextInt(getFireCount());
         for(GameObject go: gameObjects) {
             if(go instanceof Fires) {
                 for (Fire fire : fires) {
@@ -132,6 +110,41 @@ public class GameWorld {
                 river.getHeight());
         if(helicopter.checkFuel()) {
             endGame();
+        }
+    }
+
+    private void createFiresInBuilding(){
+        for(GameObject go : gameObjects) {
+            if(go instanceof Buildings) {
+                for(Building building : buildings) {
+                    int randomFiresInBuilding = new Random().nextInt(2) + 2;
+                    for(int i =0;i<randomFiresInBuilding;i++) {
+                        int size =
+                                new Random().nextInt(4) + 10;
+                        fire = new Fire(worldSize, size);
+                        area += fire.getArea();
+                        fires.add(fire);
+                        fire.setFire(building);
+                    }
+                }
+            }
+        }
+    }
+
+    private void checkFireBudget() {
+        for(GameObject go : gameObjects) {
+            if(go instanceof Buildings) {
+                for(Building building: buildings) {
+                    if(area != fireArea) {
+                        int remSize =
+                                (int)Math.sqrt(Math.ceil((fireArea - area)/Math.PI)) * 2;
+                        fire = new Fire(worldSize, remSize);
+                        fires.add(fire);
+                        fire.setFire(building);
+                        area+=fire.getArea();
+                    }
+                }
+            }
         }
     }
 
