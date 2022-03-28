@@ -24,7 +24,9 @@ public class GameWorld {
     private Fires fires, deadFires;
     private Buildings buildings;
     private final int FUEL = 25000;
-    private int fireArea, area;
+    private int fireArea, area, initArea;
+    private int tickCount;
+    private ArrayList<Integer> initialAreas;
 
     private static GameWorld gameWorld;
 
@@ -37,6 +39,8 @@ public class GameWorld {
     }
 
     public void init() {
+        tickCount = 0;
+        initialAreas = new ArrayList<>();
         river = new River(worldSize);
         helipad = new Helipad(worldSize);
         helicopter = new Helicopter(helipad.getHelipadCenter(),
@@ -80,6 +84,20 @@ public class GameWorld {
     }
 
     public void tick() {
+        int counti = 0;
+        for(GameObject go : gameObjects) {
+            if(go instanceof Buildings) {
+                for(Building b : buildings) {
+                    int damage = 0;
+                    for(Fire fire : b.getFires()) {
+                        damage += fire.getArea();
+                    }
+                    System.err.println("damage at building " + counti + "is: " + (damage-initialAreas.get(counti))/b.getValue());
+                    b.setDamage(((damage-initialAreas.get(counti))/b.getValue()));
+                    counti++;
+                }
+            }
+        }
         helicopter.move();
         int fireCount = 0;
         int chosenFire = new Random().nextInt(getFireCount());
@@ -111,6 +129,7 @@ public class GameWorld {
         if(helicopter.checkFuel()) {
             endGame();
         }
+        tickCount++;
     }
 
     private void createFiresInBuilding(){
@@ -124,11 +143,17 @@ public class GameWorld {
                         fire = new Fire(worldSize, size);
                         area += fire.getArea();
                         fires.add(fire);
+                        building.setFires(fire);
                         fire.setFire(building);
                     }
+                    getInitialArea(area);
                 }
             }
         }
+    }
+
+    private void getInitialArea(int area) {
+        initialAreas.add(area);
     }
 
     private void checkFireBudget() {
@@ -140,12 +165,21 @@ public class GameWorld {
                                 (int)Math.sqrt(Math.ceil((fireArea - area)/Math.PI)) * 2;
                         fire = new Fire(worldSize, remSize);
                         fires.add(fire);
+                        building.setFires(fire);
                         fire.setFire(building);
                         area+=fire.getArea();
                     }
                 }
             }
         }
+    }
+
+    private int calculateBuildingDamage(Building b, int initialArea) {
+        int currentFireArea = 0;
+        for(Fire fire: fires) {
+            currentFireArea += fire.getArea();
+        }
+        return ((currentFireArea- initialArea)/b.getValue())*100;
     }
 
     private void gameWon() {
