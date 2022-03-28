@@ -14,20 +14,9 @@ import org.csc133.a2.commands.*;
 
 public class Game extends Form implements Runnable {
     private GameWorld gw;
-    MapView mapView;
-    GlassCockpit glassCockpit;
-    ControlCluster controlCluster;
-
-    public final static int DISP_W = Display.getInstance().getDisplayWidth();
-    public final static int DISP_H = Display.getInstance().getDisplayHeight();
-
-    public static int getSmallDim() {
-        return Math.min(DISP_W, DISP_H);
-    }
-
-    public static int getLargeDim() {
-        return Math.max(DISP_W, DISP_H);
-    }
+    private MapView mapView;
+    private GlassCockpit glassCockpit;
+    private ControlCluster controlCluster;
 
     public Game() {
         gw = GameWorld.getInstance();
