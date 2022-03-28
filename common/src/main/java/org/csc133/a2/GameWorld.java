@@ -174,14 +174,6 @@ public class GameWorld {
         }
     }
 
-    private int calculateBuildingDamage(Building b, int initialArea) {
-        int currentFireArea = 0;
-        for(Fire fire: fires) {
-            currentFireArea += fire.getArea();
-        }
-        return ((currentFireArea- initialArea)/b.getValue())*100;
-    }
-
     private void gameWon() {
         if(Dialog.show("Congratulations!",
                 "You put out all the fires!\n Score: "+helicopter.getFuel(),
