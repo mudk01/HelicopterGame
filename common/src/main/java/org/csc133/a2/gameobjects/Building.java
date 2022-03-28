@@ -19,7 +19,7 @@ public class Building extends Fixed{
         dimension = new Dimension(dimensions.getWidth(),
                 dimensions.getHeight());
         this.location = new Point(loc.getX(), loc.getY());
-        value = new Random().nextInt(900) + 101;
+        value = (new Random().nextInt(10) + 1)*100;
         System.err.println(value + "is value");
         fires = new Fires();
     }
