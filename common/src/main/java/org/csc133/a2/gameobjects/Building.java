@@ -52,6 +52,10 @@ public class Building extends Fixed{
         return fires;
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
     @Override
     public void draw(Graphics g, Point containerOrigin) {
         int xInfoOffset = 10;
