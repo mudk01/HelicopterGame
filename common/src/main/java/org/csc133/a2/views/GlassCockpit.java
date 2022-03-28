@@ -45,6 +45,8 @@ public class GlassCockpit extends Container {
         speed.setText(gw.getSpeed());
         fuel.setText(gw.getFuel());
         fires.setText(String.valueOf(gw.getFireCount()));
+        fireSize.setText(gw.getFireSize());
+        damage.setText(gw.getTotalAverageDamage());
 
 
     }
