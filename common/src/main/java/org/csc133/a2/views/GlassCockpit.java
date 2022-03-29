@@ -7,8 +7,8 @@ import com.codename1.ui.layouts.GridLayout;
 import org.csc133.a2.GameWorld;
 
 public class GlassCockpit extends Container {
-    GameWorld gw;
-    Label heading, speed, fuel, fires, fireSize, damage, loss;
+    private GameWorld gw;
+    private Label heading, speed, fuel, fires, fireSize, damage, loss;
     public GlassCockpit(GameWorld gw) {
         this.gw = gw;
         this.setLayout(new GridLayout(2, 7));
@@ -46,7 +46,7 @@ public class GlassCockpit extends Container {
         fuel.setText(gw.getFuel());
         fires.setText(String.valueOf(gw.getFireCount()));
         fireSize.setText(gw.getFireSize());
-        damage.setText(gw.getTotalAverageDamage());
+        damage.setText(String.valueOf(gw.getTotalAverageDamage()) + "%");
         loss.setText(gw.getFinancialLoss());
 
     }
