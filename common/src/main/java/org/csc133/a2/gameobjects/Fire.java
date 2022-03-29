@@ -12,7 +12,7 @@ public class Fire extends Fixed {
     private Point centerLocation;
     private int size, radius, growth;
     private Font fireSizeFont;
-    private boolean isDetected;
+    private boolean isDetected, canGrow;
     private FireState currentState;
 
     public Fire(Dimension worldSize, int fireSize) {
@@ -26,6 +26,7 @@ public class Fire extends Fixed {
                 Font.STYLE_PLAIN, Font.SIZE_MEDIUM);
         isDetected = false;
         currentState = UnStartedFire.instance();
+        canGrow = true;
     }
 
     public void setFire(Building b) {
@@ -45,11 +46,13 @@ public class Fire extends Fixed {
     }
 
     public void growFire() {
-        growth = new Random().nextInt(2);
-        size += growth;
-        radius = size/2;
-        centerLocation.setX(centerLocation.getX() - (int)(growth/2));
-        centerLocation.setY(centerLocation.getY() - (int)(growth/2));
+        if(canGrow == true) {
+            growth = new Random().nextInt(2);
+            size += growth;
+            radius = size / 2;
+            centerLocation.setX(centerLocation.getX() - (int) (growth / 2));
+            centerLocation.setY(centerLocation.getY() - (int) (growth / 2));
+        }
     }
 
     public Point getFireLocation() {
@@ -108,6 +111,10 @@ public class Fire extends Fixed {
 
     public int getArea() {
         return (int) (Math.PI * (radius*radius));
+    }
+
+    public void setCanGrow(Boolean canGrow) {
+        this.canGrow = canGrow;
     }
 
 }
