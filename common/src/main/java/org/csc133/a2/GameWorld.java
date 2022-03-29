@@ -95,7 +95,16 @@ public class GameWorld {
                     for(Fire fire : b.getFires()) {
                         buildingDamage += fire.getArea();
                     }
-                    b.setDamage(((buildingDamage-initialAreas.get(buildingCount))/b.getValue()));
+                    int currDamage =
+                            (buildingDamage-initialAreas.get(buildingCount))/b.getValue();
+                    if(currDamage < 100) {
+                        b.setDamage(currDamage);
+                    } else {
+                        b.setDamage(100);
+                        for(Fire fire : b.getFires()) {
+                            fire.setCanGrow(false);
+                        }
+                    }
                     buildingCount++;
                 }
             }
@@ -123,29 +132,22 @@ public class GameWorld {
             }
         }
         fires.getGameObjects().removeAll(deadFires.getGameObjects());
-        if(getFireCount() == 0 && helicopter.isOnPad() && checkBuildingDamage()) {
+        if((getFireCount() == 0 && helicopter.isOnPad()) && (!checkBuildingsDestroyed())) {
             gameWon();
+        }
+        if(checkBuildingsDestroyed()) {
+            endGameBuildings();
         }
         helicopter.checkRiverCollision(river.getLocation(), river.getWidth(),
                 river.getHeight());
         if(helicopter.checkFuel()) {
-            endGame();
+            endGameFuel();
         }
         tickCount++;
     }
 
-    private boolean checkBuildingDamage() {
-        boolean areAllBuildingsUp = true;
-        for(GameObject go : gameObjects) {
-            if(go instanceof Buildings) {
-                for(Building building : buildings) {
-                    if(building.getDamage() >= 100) {
-                        areAllBuildingsUp = false;
-                    }
-                }
-            }
-        }
-        return areAllBuildingsUp;
+    private boolean checkBuildingsDestroyed() {
+        return getTotalAverageDamage() >= 100;
     }
 
     private void createFiresInBuilding(){
@@ -191,9 +193,10 @@ public class GameWorld {
         System.err.println("Area in chb is: " + area);
     }
 
+
     private void gameWon() {
         if(Dialog.show("Congratulations!",
-                "You put out all the fires!\n Score: "+helicopter.getFuel(),
+                "You put out all the fires!\n Score: " + calculateScore(),
                 "Replay", "Exit")) {
             init();
         }
@@ -202,8 +205,18 @@ public class GameWorld {
         }
     }
 
-    private void endGame() {
+    private void endGameFuel() {
         if(Dialog.show("Game Over", "You ran out of fuel",
+                "Replay", "Exit")) {
+            init();
+        }
+        else {
+            Display.getInstance().exitApplication();
+        }
+    }
+
+    private void endGameBuildings() {
+        if(Dialog.show("Game Over", "All Buildings Were Destroyed",
                 "Replay", "Exit")) {
             init();
         }
@@ -214,14 +227,7 @@ public class GameWorld {
 
     //score is the value of building units saved
     public int calculateScore() {
-        score = 0;
-        for(GameObject go : gameObjects) {
-            if(go instanceof Buildings) {
-                for(Building building : buildings) {
-                    score += building.getValue() - building.getDamage();
-                }
-            }
-        }
+        score = 100 - getTotalAverageDamage();
         return score;
     }
 
@@ -296,16 +302,17 @@ public class GameWorld {
         return String.valueOf(fireSize);
     }
 
-    public String getTotalAverageDamage() {
+    public int getTotalAverageDamage() {
+        averageBuildingDamage = 0;
         for(GameObject go : gameObjects) {
             if(go instanceof Buildings) {
                 for(Building building : buildings) {
-                    averageBuildingDamage = building.getDamage();
+                    averageBuildingDamage += building.getDamage();
                 }
             }
         }
         averageBuildingDamage = Math.round(averageBuildingDamage/3);
-        return String.valueOf(averageBuildingDamage);
+        return averageBuildingDamage;
     }
 
     public String getFinancialLoss() {
