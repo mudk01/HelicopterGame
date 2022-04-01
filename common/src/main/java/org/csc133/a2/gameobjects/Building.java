@@ -8,19 +8,18 @@ import com.codename1.ui.geom.Point;
 import java.util.Random;
 
 public class Building extends Fixed{
-    private Point location, newFireLocation;
-    private Dimension dimension;
+    private Point newFireLocation;
     private int value, damage;
+    private Dimension worldSize;
     private Fires fires;
 
-    public Building(Dimension worldSize, Point loc, Dimension dimensions) {
+    public Building(Dimension worldSize, Point location, Dimension dimensions) {
         this.color = ColorUtil.rgb(255,0,0);
-        this.worldSize = worldSize;
-        dimension = new Dimension(dimensions.getWidth(),
+        this.dimension = new Dimension(dimensions.getWidth(),
                 dimensions.getHeight());
-        this.location = new Point(loc.getX(), loc.getY());
+        this.location = new Point(location.getX(), location.getY());
+        this.worldSize = worldSize;
         value = (new Random().nextInt(10) + 1)*100;
-        System.err.println(value + "is value");
         fires = new Fires();
     }
 
