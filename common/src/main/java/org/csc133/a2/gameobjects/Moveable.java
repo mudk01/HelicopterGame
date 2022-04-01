@@ -11,6 +11,10 @@ abstract class Moveable extends GameObject {
     public void move() {
     }
 
+    public int getSpeed() {
+        return speed;
+    }
+
     public int getHeading(double angle) {
         this.heading = (int)(Math.round(Math.toDegrees(angle)));
         if(heading < 0) {
