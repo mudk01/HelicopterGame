@@ -17,12 +17,12 @@ public class River extends Fixed{
 
     @Override
     public Point getLocation() {
-        return location;
+        return super.getLocation();
     }
 
     @Override
     public Dimension getDimension() {
-        return dimension;
+        return super.getDimension();
     }
 
     @Override
