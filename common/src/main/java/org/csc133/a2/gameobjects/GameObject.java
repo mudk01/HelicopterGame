@@ -8,10 +8,26 @@ import org.csc133.a2.interfaces.Drawable;
 public abstract class GameObject implements Drawable {
     int color;
     Dimension dimension;
-    Dimension worldSize;
+    Point location;
 
-    public String toString() {
-        return this.getClass().getSimpleName();
+    public GameObject() {
+
     }
+
+    public GameObject(Point location, Dimension dimension, int color) {
+        this.location = location;
+        this.dimension = dimension;
+        this.color = color;
+    }
+
+    public Point getLocation() {
+        return location;
+    }
+
+    public Dimension getDimension() {
+        return dimension;
+    }
+
+    public void setLocation(Point location) {}
 }
 
