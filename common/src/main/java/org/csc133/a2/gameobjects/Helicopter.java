@@ -7,24 +7,23 @@ import com.codename1.ui.geom.Point;
 import org.csc133.a2.interfaces.Steerable;
 
 public class Helicopter extends Moveable implements Steerable {
-    private int size, hRadius, centerX, centerY, currSpeed, fuel, water;
+    private int size, hRadius, centerX, centerY, fuel, water;
     private Point helipadCenterLocation, heliLocation;
     private int endHeadX, endHeadY, padSize;
     private double angle;
     private final int MAX_SPEED = 10;
     private boolean riverCollision;
-    private Dimension dimension;
 
-    public Helicopter(Point heliCenter, int helipadSize, Dimension worldSize) {
+    public Helicopter(Dimension worldSize, Point heliCenter, int helipadSize) {
         this.color = ColorUtil.rgb(252, 252, 28);
-        this.worldSize = worldSize;
-        dimension = new Dimension(this.worldSize.getWidth(),
-                this.worldSize.getHeight());
+        this.dimension = new Dimension(worldSize.getWidth(),
+                worldSize.getHeight());
+        this.location = heliCenter;
         size = dimension.getHeight()/42;
-        currSpeed = 0;
+        this.speed = 0;
         fuel = 0;
         water = 0;
-        helipadCenterLocation = heliCenter;
+        helipadCenterLocation = location;
         hRadius = size/2;
         heliLocation = new Point(helipadCenterLocation.getX() - hRadius,
                 helipadCenterLocation.getY());
@@ -40,25 +39,25 @@ public class Helicopter extends Moveable implements Steerable {
     @Override
     public void move(){
         heliLocation.setY((int) (heliLocation.getY() - Math.sin(angle) *
-                currSpeed));
+                speed));
         centerY = heliLocation.getY() + hRadius;
         heliLocation.setX((int) (heliLocation.getX() + Math.cos(angle) *
-                currSpeed));
+                speed));
         centerX = heliLocation.getX() + hRadius;
         endHeadX = (int) (centerX + Math.cos(angle) * size*2);
         endHeadY = (int) (centerY - Math.sin(angle) * size*2);
-        fuel -= (int) (Math.sqrt(currSpeed) + 5);
+        fuel -= (int) (Math.sqrt(speed) + 5);
     }
 
     public void speedUp() {
-        if(currSpeed < MAX_SPEED) {
-            currSpeed++;
+        if(speed < MAX_SPEED) {
+            speed++;
         }
     }
 
     public void slowDown() {
-        if(currSpeed > 0) {
-            currSpeed--;
+        if(speed > 0) {
+            speed--;
         }
     }
 
@@ -76,11 +75,12 @@ public class Helicopter extends Moveable implements Steerable {
         endHeadY = (int) (centerY - Math.sin(angle) * size*2);
     }
 
-    public void checkRiverCollision(Point location, int width, int height) {
-        riverCollision = (centerX >= location.getX() && centerY >=
-                location.getY()) &&
-                (centerX <= (location.getX() + width) && centerY <=
-                        (location.getY() + height));
+    public void checkRiverCollision(Point riverLocation,
+                                    Dimension riverDimension) {
+        riverCollision = (centerX >= riverLocation.getX() && centerY >=
+                riverLocation.getY()) &&
+                (centerX <= (riverLocation.getX() + riverDimension.getWidth()) && centerY <=
+                        (riverLocation.getY() + riverDimension.getHeight()));
     }
 
     public boolean checkFireCollision(Fire fire) {
@@ -92,7 +92,7 @@ public class Helicopter extends Moveable implements Steerable {
     }
 
     public void drinkWater() {
-        if((riverCollision && currSpeed <= 2) && water < 1000) {
+        if((riverCollision && speed <= 2) && water < 1000) {
             water += 100;
         }
     }
@@ -151,10 +151,11 @@ public class Helicopter extends Moveable implements Steerable {
     }
 
     public int getSpeed() {
-        return currSpeed;
+        return speed;
     }
 
+    @Override
     public int getHeading() {
-        return (int)(Math.round(Math.toDegrees(angle)));
+        return super.getHeading(angle);
     }
 }
