@@ -42,12 +42,11 @@ public class GameWorld {
     }
 
     public void init() {
-        System.err.println("INIT()");
         initialAreas = new ArrayList<>();
         river = new River(worldSize);
         helipad = new Helipad(worldSize);
-        helicopter = new Helicopter(helipad.getHelipadCenter(),
-                helipad.getHelipadSize(), worldSize);
+        helicopter = new Helicopter(worldSize,
+                helipad.getHelipadCenter(), helipad.getHelipadSize());
         topBuildingLocation = new Point(worldSize.getWidth()/6, 5);
         rightBuildingSize = new Dimension(worldSize.getHeight()/6,
                 worldSize.getHeight()/2);
@@ -138,12 +137,16 @@ public class GameWorld {
         if(checkBuildingsDestroyed()) {
             endGameBuildings();
         }
-        helicopter.checkRiverCollision(river.getLocation(), river.getWidth(),
-                river.getHeight());
+        //Refactor to get dimension
+        helicopter.checkRiverCollision(river.getLocation(), river.getDimension());
         if(helicopter.checkFuel()) {
             endGameFuel();
         }
         tickCount++;
+    }
+
+    private void createBuildings() {
+
     }
 
     private boolean checkBuildingsDestroyed() {
@@ -167,7 +170,6 @@ public class GameWorld {
                 }
             }
         }
-        System.err.println("Total area is: " + area);
     }
 
     private void getInitialArea(int area) {
@@ -190,7 +192,6 @@ public class GameWorld {
                 }
             }
         }
-        System.err.println("Area in chb is: " + area);
     }
 
 
