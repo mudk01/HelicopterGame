@@ -4,19 +4,16 @@ import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
-import org.csc133.a2.Game;
 
 public class Helipad extends Fixed{
     private Point rectangleLocation, centerLocation;
     private int boxSize;
     private int circleSize, radius;
-    private Dimension dimension;
 
     public Helipad(Dimension worldSize) {
-        this.worldSize = worldSize;
         this.color = ColorUtil.rgb(139,139,139);
-        dimension = new Dimension(this.worldSize.getWidth(),
-                this.worldSize.getHeight());
+        this.dimension = new Dimension(worldSize.getWidth(),
+                worldSize.getHeight());
         boxSize = (int) (dimension.getHeight()/8.5);
         circleSize = (int) (dimension.getHeight()/11.5);
         radius = circleSize/2;
