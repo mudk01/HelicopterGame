@@ -155,8 +155,8 @@ public class Helicopter extends Moveable implements Steerable {
         return super.getSpeed();
     }
 
-    @Override
     public int getHeading() {
-        return super.getHeading(angle);
+        heading = (int)(Math.round(Math.toDegrees(angle)));
+        return super.getHeadingAngle(heading);
     }
 }
