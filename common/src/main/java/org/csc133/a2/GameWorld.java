@@ -1,12 +1,9 @@
 package org.csc133.a2;
-
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import org.csc133.a2.gameobjects.*;
-
 import java.util.ArrayList;
 import java.util.Random;
-
 import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
 
@@ -92,7 +89,6 @@ public class GameWorld {
         if(getFireCount()>0) {
             chosenFire = new Random().nextInt(15);
         }
-        //changer fire growth rate
         for(GameObject go: gameObjects) {
             if(go instanceof Fires) {
                 for (Fire fire : fires) {
@@ -123,7 +119,6 @@ public class GameWorld {
                 }
             }
         }
-//        fires.getGameObjects().removeAll(deadFires.getGameObjects());
         if((getFireCount() == 0 && helicopter.isOnPad()) && (!checkBuildingsDestroyed())) {
             gameWon();
         }
