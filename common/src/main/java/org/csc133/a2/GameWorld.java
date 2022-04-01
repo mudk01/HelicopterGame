@@ -88,7 +88,7 @@ public class GameWorld {
         helicopter.move();
         fireCount = 0;
         if(getFireCount()>0) {
-            chosenFire = new Random().nextInt(15);
+            chosenFire = new Random().nextInt(getFireCount());
         }
         for(GameObject go: gameObjects) {
             if(go instanceof Fires) {
