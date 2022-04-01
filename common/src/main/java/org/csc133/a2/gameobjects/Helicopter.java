@@ -150,8 +150,9 @@ public class Helicopter extends Moveable implements Steerable {
                         (int)(size*3.5));
     }
 
+    @Override
     public int getSpeed() {
-        return speed;
+        return super.getSpeed();
     }
 
     @Override
