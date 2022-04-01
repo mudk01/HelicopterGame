@@ -25,7 +25,7 @@ public class GameWorld {
     private Buildings buildings;
     private final int FUEL = 25000;
     private int fireArea, area, fireSize, size;
-    private int tickCount, buildingCount, averageBuildingDamage,
+    private int buildingCount, averageBuildingDamage,
     remainingAreaSize, buildingDamage, randomFiresInBuilding, fireCount,
             chosenFire, score;
     private double financialLoss;
@@ -121,7 +121,6 @@ public class GameWorld {
         if(helicopter.checkFuel()) {
             endGameFuel();
         }
-        tickCount++;
     }
 
     private void createBuildings() {
@@ -226,7 +225,6 @@ public class GameWorld {
         }
     }
 
-    //score is the value of building units saved
     public int calculateScore() {
         score = 100 - getTotalAverageDamage();
         return score;
