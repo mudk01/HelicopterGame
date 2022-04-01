@@ -89,7 +89,10 @@ public class GameWorld {
         }
         helicopter.move();
         fireCount = 0;
-        chosenFire = new Random().nextInt(getFireCount());
+        if(getFireCount()>0) {
+            chosenFire = new Random().nextInt(15);
+        }
+        //changer fire growth rate
         for(GameObject go: gameObjects) {
             if(go instanceof Fires) {
                 for (Fire fire : fires) {
@@ -109,14 +112,24 @@ public class GameWorld {
                 }
             }
         }
-        fires.getGameObjects().removeAll(deadFires.getGameObjects());
+        for(GameObject go: gameObjects) {
+            if(go instanceof Fires) {
+                for(Fire fire: fires) {
+                    for(Fire deadFire : deadFires) {
+                        if(fire==deadFire) {
+                            fires.remove(deadFire);
+                        }
+                    }
+                }
+            }
+        }
+//        fires.getGameObjects().removeAll(deadFires.getGameObjects());
         if((getFireCount() == 0 && helicopter.isOnPad()) && (!checkBuildingsDestroyed())) {
             gameWon();
         }
         if(checkBuildingsDestroyed()) {
             endGameBuildings();
         }
-        //Refactor to get dimension
         helicopter.checkRiverCollision(river.getLocation(), river.getDimension());
         if(helicopter.checkFuel()) {
             endGameFuel();
@@ -156,7 +169,7 @@ public class GameWorld {
         for(GameObject go : gameObjects) {
             if(go instanceof Buildings) {
                 for(Building building : buildings) {
-                    randomFiresInBuilding = new Random().nextInt(2) + 2;
+                    randomFiresInBuilding = new Random().nextInt(2)+1;
                     for(int i =0;i<randomFiresInBuilding;i++) {
                         size = new Random().nextInt(4) + 10;
                         fire = new Fire(worldSize, size);
@@ -229,8 +242,6 @@ public class GameWorld {
         score = 100 - getTotalAverageDamage();
         return score;
     }
-
-
 
     public ArrayList<GameObject> getGameObjectCollection() {
         return gameObjects;
