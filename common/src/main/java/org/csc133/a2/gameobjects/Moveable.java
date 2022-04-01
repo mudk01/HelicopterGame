@@ -15,14 +15,12 @@ abstract class Moveable extends GameObject {
         return speed;
     }
 
-    public int getHeadingAngle(int head) {
-        if(heading < 0) {
-            heading += 360;
-        }
-        if(heading >= 360) {
-            heading -= 360;
-        }
-
+    public int getHeadingAngle() {
         return heading;
     }
+
+    public void setHeading(int heading){
+        this.heading = heading;
+    }
+
 }

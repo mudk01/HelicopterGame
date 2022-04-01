@@ -150,13 +150,19 @@ public class Helicopter extends Moveable implements Steerable {
                         (int)(size*3.5));
     }
 
-    @Override
     public int getSpeed() {
         return super.getSpeed();
     }
 
-    public int getHeading() {
+    @Override
+    public int getHeadingAngle() {
         heading = (int)(Math.round(Math.toDegrees(angle)));
-        return super.getHeadingAngle(heading);
+        if(heading >= 360) {
+            heading -= 360;
+        }
+        else if(heading < 0) {
+            heading += 360;
+        }
+        return heading;
     }
 }

@@ -21,10 +21,10 @@ public class GameWorld {
     private Fires fires, deadFires;
     private Buildings buildings;
     private final int FUEL = 25000;
-    private int fireArea, area, fireSize, size;
-    private int buildingCount, averageBuildingDamage,
+    private int fireArea, area, fireSize,
+    size, buildingCount, averageBuildingDamage,
     remainingAreaSize, buildingDamage, randomFiresInBuilding, fireCount,
-            chosenFire, score;
+            chosenFire, score, heading;
     private double financialLoss;
     private ArrayList<Integer> initialAreas;
 
@@ -243,7 +243,7 @@ public class GameWorld {
     }
 
     public String getHeading() {
-        return String.valueOf(helicopter.getHeading());
+        return String.valueOf(helicopter.getHeadingAngle());
     }
 
     public String getFuel() {
