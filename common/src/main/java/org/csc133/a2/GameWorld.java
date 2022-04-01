@@ -24,7 +24,7 @@ public class GameWorld {
     private int fireArea, area, fireSize,
     size, buildingCount, averageBuildingDamage,
     remainingAreaSize, buildingDamage, randomFiresInBuilding, fireCount,
-            chosenFire, score, heading;
+            chosenFire, score;
     private double financialLoss;
     private ArrayList<Integer> initialAreas;
 
