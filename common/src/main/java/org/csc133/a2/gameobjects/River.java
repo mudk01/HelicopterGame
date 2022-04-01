@@ -6,37 +6,32 @@ import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.geom.Point;
 
 public class River extends Fixed{
-    private int x, y;
-    private Point location;
-
 
     public River(Dimension worldSize) {
         this.color = ColorUtil.rgb(0,52,254);
-        this.worldSize = worldSize;
         this.dimension = new Dimension(worldSize.getWidth(),
                 worldSize.getHeight()/9);
         location = new Point(0,
                 worldSize.getHeight()/3-this.dimension.getHeight());
     }
 
+    @Override
     public Point getLocation() {
         return location;
     }
 
-    public int getWidth() {
-        return dimension.getWidth();
-    }
-
-    public int getHeight() {
-        return dimension.getHeight();
+    @Override
+    public Dimension getDimension() {
+        return dimension;
     }
 
     @Override
     public void draw(Graphics g, Point containerOrigin) {
         g.setColor(color);
-        x = location.getX();
-        y = containerOrigin.getY() + location.getY();
-        g.drawRect(x,y,dimension.getWidth(),dimension.getHeight(),5);
+        g.drawRect(containerOrigin.getX() + location.getX(),
+                containerOrigin.getY() + location.getY(),
+                dimension.getWidth(),
+                dimension.getHeight(),5);
     }
 
 
