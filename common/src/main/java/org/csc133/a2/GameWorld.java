@@ -47,32 +47,11 @@ public class GameWorld {
         helipad = new Helipad(worldSize);
         helicopter = new Helicopter(worldSize,
                 helipad.getHelipadCenter(), helipad.getHelipadSize());
-        topBuildingLocation = new Point(worldSize.getWidth()/6, 5);
-        rightBuildingSize = new Dimension(worldSize.getHeight()/6,
-                worldSize.getHeight()/2);
-        rightBuildingLocation =
-                new Point(worldSize.getWidth()/10 ,
-                        worldSize.getHeight()/3 + worldSize.getHeight()/18);
-        leftBuildingSize = new Dimension(worldSize.getHeight()/5,
-                worldSize.getHeight()/3);
-        leftBuildingLocation =
-                new Point(worldSize.getWidth() - worldSize.getWidth()/10 - leftBuildingSize.getWidth(),
-                        worldSize.getHeight()/2);
-        topBuildingSize = new Dimension((worldSize.getWidth()*2)/3,
-                worldSize.getHeight()/10);
-        buildingTop = new Building(worldSize, topBuildingLocation,
-                topBuildingSize);
-        buildingRight = new Building(worldSize, rightBuildingLocation,
-                rightBuildingSize);
-        buildingLeft = new Building(worldSize, leftBuildingLocation,
-                leftBuildingSize);
         gameObjects = new ArrayList<>();
         fires = new Fires();
         deadFires = new Fires();
         buildings = new Buildings();
-        buildings.add(buildingLeft);
-        buildings.add(buildingRight);
-        buildings.add(buildingTop);
+        createBuildings();
         gameObjects.add(river);
         gameObjects.add(helipad);
         gameObjects.add(buildings);
@@ -146,7 +125,28 @@ public class GameWorld {
     }
 
     private void createBuildings() {
-
+        topBuildingLocation = new Point(worldSize.getWidth()/6, 5);
+        rightBuildingSize = new Dimension(worldSize.getHeight()/6,
+                worldSize.getHeight()/2);
+        rightBuildingLocation =
+                new Point(worldSize.getWidth()/10 ,
+                        worldSize.getHeight()/3 + worldSize.getHeight()/18);
+        leftBuildingSize = new Dimension(worldSize.getHeight()/5,
+                worldSize.getHeight()/3);
+        leftBuildingLocation =
+                new Point(worldSize.getWidth() - worldSize.getWidth()/10 - leftBuildingSize.getWidth(),
+                        worldSize.getHeight()/2);
+        topBuildingSize = new Dimension((worldSize.getWidth()*2)/3,
+                worldSize.getHeight()/10);
+        buildingTop = new Building(worldSize, topBuildingLocation,
+                topBuildingSize);
+        buildingRight = new Building(worldSize, rightBuildingLocation,
+                rightBuildingSize);
+        buildingLeft = new Building(worldSize, leftBuildingLocation,
+                leftBuildingSize);
+        buildings.add(buildingLeft);
+        buildings.add(buildingRight);
+        buildings.add(buildingTop);
     }
 
     private boolean checkBuildingsDestroyed() {
