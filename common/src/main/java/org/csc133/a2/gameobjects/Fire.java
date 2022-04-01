@@ -17,9 +17,8 @@ public class Fire extends Fixed {
 
     public Fire(Dimension worldSize, int fireSize) {
         this.color = ColorUtil.rgb(255, 4, 252);
-        this.worldSize = worldSize;
-        this.dimension = new Dimension(this.worldSize.getWidth(),
-                this.worldSize.getHeight());
+        this.dimension = new Dimension(worldSize.getWidth(),
+                worldSize.getHeight());
         size = fireSize;
         radius = size/2;
         fireSizeFont = Font.createSystemFont(Font.FACE_SYSTEM,
@@ -71,6 +70,7 @@ public class Fire extends Fixed {
         size -= water / (new Random().nextInt(7) + 8);
     }
 
+    @Override
     public void setLocation(Point buildingLocation) {
         centerLocation = new Point((buildingLocation.getX() + radius),
                 (buildingLocation.getY() + radius));
