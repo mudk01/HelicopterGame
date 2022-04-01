@@ -82,7 +82,8 @@ public class Fire extends Fixed {
         g.setFont(fireSizeFont);
         if(size > 0) {
             g.fillArc(centerLocation.getX() - radius,
-                    containerOrigin.getY() + centerLocation.getY() - radius, size,
+                    containerOrigin.getY() + centerLocation.getY() - radius,
+                    size,
                     size, 0, 360);
             g.drawString("" + size, centerLocation.getX() + radius,
                     containerOrigin.getY() + centerLocation.getY() + radius);

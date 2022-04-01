@@ -71,7 +71,8 @@ public class GameWorld {
                         buildingDamage += fire.getArea();
                     }
                     int currDamage =
-                            (buildingDamage-initialAreas.get(buildingCount))/b.getValue();
+                            (buildingDamage-initialAreas.get(buildingCount))/
+                                    b.getValue();
                     if(currDamage < 100) {
                         b.setDamage(currDamage);
                     } else {
@@ -119,13 +120,15 @@ public class GameWorld {
                 }
             }
         }
-        if((getFireCount() == 0 && helicopter.isOnPad()) && (!checkBuildingsDestroyed())) {
+        if((getFireCount() == 0 && helicopter.isOnPad()) &&
+                (!checkBuildingsDestroyed())) {
             gameWon();
         }
         if(checkBuildingsDestroyed()) {
             endGameBuildings();
         }
-        helicopter.checkRiverCollision(river.getLocation(), river.getDimension());
+        helicopter.checkRiverCollision(river.getLocation(),
+                river.getDimension());
         if(helicopter.checkFuel()) {
             endGameFuel();
         }
@@ -141,7 +144,8 @@ public class GameWorld {
         leftBuildingSize = new Dimension(worldSize.getHeight()/5,
                 worldSize.getHeight()/3);
         leftBuildingLocation =
-                new Point(worldSize.getWidth() - worldSize.getWidth()/10 - leftBuildingSize.getWidth(),
+                new Point(worldSize.getWidth() - worldSize.getWidth()/10 -
+                        leftBuildingSize.getWidth(),
                         worldSize.getHeight()/2);
         topBuildingSize = new Dimension((worldSize.getWidth()*2)/3,
                 worldSize.getHeight()/10);
@@ -189,7 +193,8 @@ public class GameWorld {
                 for(Building building: buildings) {
                     if(area < fireArea) {
                         remainingAreaSize =
-                                (int)Math.sqrt(Math.ceil((fireArea - area)/Math.PI)) * 2;
+                                (int)Math.sqrt(Math.ceil((fireArea - area)/
+                                        Math.PI)) * 2;
                         fire = new Fire(worldSize, remainingAreaSize);
                         fires.add(fire);
                         building.setFires(fire);
@@ -200,7 +205,6 @@ public class GameWorld {
             }
         }
     }
-
 
     private void gameWon() {
         if(Dialog.show("Congratulations!",
@@ -325,7 +329,8 @@ public class GameWorld {
         for(GameObject go : gameObjects) {
             if(go instanceof Buildings) {
                 for(Building building : buildings) {
-                    financialLoss += ((building.getDamage())/100.0) * building.getValue();
+                    financialLoss += ((building.getDamage())/100.0) *
+                            building.getValue();
                 }
             }
         }

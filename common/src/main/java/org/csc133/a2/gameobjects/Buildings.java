@@ -4,8 +4,6 @@ import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Graphics;
 import com.codename1.ui.geom.Point;
 
-import java.util.ArrayList;
-
 public class Buildings extends GameObjectCollection<Building>{
 
     public Buildings() {

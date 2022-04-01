@@ -79,7 +79,8 @@ public class Helicopter extends Moveable implements Steerable {
                                     Dimension riverDimension) {
         riverCollision = (centerX >= riverLocation.getX() && centerY >=
                 riverLocation.getY()) &&
-                (centerX <= (riverLocation.getX() + riverDimension.getWidth()) && centerY <=
+                (centerX <= (riverLocation.getX() + riverDimension.getWidth())
+                        && centerY <=
                         (riverLocation.getY() + riverDimension.getHeight()));
     }
 

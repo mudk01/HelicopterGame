@@ -26,9 +26,11 @@ public class Building extends Fixed{
     public void setFireInBuilding(Fire fire) {
         if(dimension.getWidth() != 0 && dimension.getHeight() != 0) {
             newFireLocation =
-                new Point(new Random().nextInt(dimension.getWidth()-15) +
+                new Point(new Random().nextInt(dimension.getWidth()-
+                        15) +
                         location.getX(),
-                        new Random().nextInt(dimension.getHeight()-15) +
+                        new Random().nextInt(dimension.getHeight()-
+                                15) +
                                 location.getY());
             fire.setLocation(newFireLocation);
             fire.start();
@@ -64,10 +66,12 @@ public class Building extends Fixed{
                 dimension.getWidth(), dimension.getHeight(), 5);
         g.drawString("V: " + value,
                 location.getX() + dimension.getWidth() + xInfoOffset,
-                containerOrigin.getY() + location.getY() + dimension.getHeight() - worldSize.getHeight()/15);
+                containerOrigin.getY() + location.getY() +
+                        dimension.getHeight() - worldSize.getHeight()/15);
         g.drawString("D: " + damage +"%",
                 location.getX() + dimension.getWidth() + xInfoOffset,
-                containerOrigin.getY() + location.getY() + dimension.getHeight() - worldSize.getHeight()/32);
+                containerOrigin.getY() + location.getY() +
+                        dimension.getHeight() - worldSize.getHeight()/32);
     }
 
 }
